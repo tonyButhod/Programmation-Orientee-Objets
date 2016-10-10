@@ -41,4 +41,4 @@ exeLecture:
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
 clean:
-	rm -rf bin/*.class
+	rm -rf bin/*.class src/*~ src/objects/*~
