@@ -21,12 +21,13 @@ public class Incendie {
 
     /* Construit un incendie */
     public Incendie(Case pos, int ltr) {
-        this.Case = Case;
+        this.position = pos;
         setLitresEau(ltr);
     }
 
     @Override
     public String toString() {
-        return new String("Feu à la case " + this.position.toString() + ", necessite " this.getLitresEau() + "L d'eau");
+        return new String("Feu à la case " + this.position.toString() + ", necessite " + this.getLitresEau() + "L d'eau");
+    }
         
 }
