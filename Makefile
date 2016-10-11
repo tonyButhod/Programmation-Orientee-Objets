@@ -34,6 +34,11 @@ TestCase: src/TestCase.java
 	javac -d bin -sourcepath src src/TestCase.java
 	javac -d bin -sourcepath src src/objects/Case.java
 	javac -d bin -sourcepath src src/objects/NatureTerrain.java
+
+TestIncendie: src/TestIncendie.java
+	javac -d bin -sourcepath src src/TestIncendie.java
+	javac -d bin -sourcepath src src/objects/Incendie.java
+	javac -d bin -sourcepath src src/objects/NatureTerrain.java
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
@@ -47,5 +52,7 @@ exeLecture:
 
 exeTestCase: 
 	java -classpath bin TestCase
+exeTestIncendie:
+	java -classpath bin TestIncendie
 clean:
 	rm -rf bin/*.class bin/objects/*.class  src/*~ src/objects/*~
