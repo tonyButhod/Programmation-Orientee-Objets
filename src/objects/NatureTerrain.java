@@ -1,9 +1,5 @@
-
-class Case {
-
-}
-
-enum NatureTerrain {
+package objects;
+public enum NatureTerrain {
         EAU, 
         FORET, 
         ROCHE, 

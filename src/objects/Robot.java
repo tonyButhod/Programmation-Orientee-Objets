@@ -1,4 +1,4 @@
-
+package objects;
 abstract class Robot {
         //Attributs Robot à définir
         private Case position;
@@ -17,11 +17,4 @@ abstract class Robot {
         public void remplirReservoir();
 
         //Rajouter des nouvelles méthodes si nécessaires
-}
-
-enum Direction {
-        NORD, 
-        SUD, 
-        EST, 
-        OUEST
 }
