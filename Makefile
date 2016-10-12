@@ -44,6 +44,9 @@ io: src/io/LecteurDonnees.java
 objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/Case.java src/objects/Carte.java
 	javac -d bin -sourcepath src $^
 
+TestIncendie: objects src/TestIncendie.java
+	javac -d bin -sourcepath src src/TestIncendie.java
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
@@ -60,6 +63,9 @@ exeTestCase:
 
 exeTestCarte: TestCarte
 	java -classpath bin TestCarte
+
+exeTestIncendie:
+	java -classpath bin TestIncendie
 
 clean:
 	rm -rf bin/*.class bin/io/*.class bin/objects/*.class  src/*~ src/objects/*~

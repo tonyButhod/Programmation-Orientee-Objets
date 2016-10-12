@@ -6,9 +6,13 @@ abstract class Robot {
         protected int volEau;
         protected int volEauMax;
 
-        public Case getPosition();
+        public Case getPosition(){
+        	return this.position;
+        }
 
-        public void setPosition(Case c);
+        public void setPosition(Case c){
+        	this.position = c;
+        }
 
         public double getVitesse(NatureTerrain NT);
 
