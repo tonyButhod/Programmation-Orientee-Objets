@@ -5,6 +5,11 @@ import java.io.*;
 import java.util.*;
 import java.util.zip.DataFormatException;
 
+import objects.Direction;
+import objects.NatureTerrain;
+import objects.Case;
+import objects.Carte;
+
 
 
 /**
@@ -37,15 +42,18 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static void lire(String fichierDonnees)
+    public static Carte lire(String fichierDonnees)
+    //Cette fonction renvoie Carte : temporaire pour les tests
+    //Elle devra renvoyer DonneesSimulation
         throws FileNotFoundException, DataFormatException {
-        System.out.println("\n == Lecture du fichier" + fichierDonnees);
+        System.out.println("\n == Lecture du fichier " + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
-        lecteur.lireCarte();
-        lecteur.lireIncendies();
-        lecteur.lireRobots();
+        Carte map = lecteur.lireCarte();
+        //lecteur.lireIncendies();
+        //lecteur.lireRobots();
         scanner.close();
         System.out.println("\n == Lecture terminee");
+        return map;
     }
 
 
@@ -69,18 +77,22 @@ public class LecteurDonnees {
      * Lit et affiche les donnees de la carte.
      * @throws ExceptionFormatDonnees
      */
-    private void lireCarte() throws DataFormatException {
+    private Carte lireCarte() throws DataFormatException {
         ignorerCommentaires();
+        Carte map;
         try {
             int nbLignes = scanner.nextInt();
             int nbColonnes = scanner.nextInt();
             int tailleCases = scanner.nextInt();	// en m
-            System.out.println("Carte " + nbLignes + "x" + nbColonnes
-                    + "; taille des cases = " + tailleCases);
+            /*System.out.println("Carte " + nbLignes + "x" + nbColonnes
+              + "; taille des cases = " + tailleCases);*/
+            map = new Carte(nbLignes, nbColonnes, tailleCases);
 
+            Case c;
             for (int lig = 0; lig < nbLignes; lig++) {
                 for (int col = 0; col < nbColonnes; col++) {
-                    lireCase(lig, col);
+                    c = map.getCase(lig, col);
+                    c.setNature(lireCase(lig, col));
                 }
             }
 
@@ -89,6 +101,7 @@ public class LecteurDonnees {
                     + "Attendu: nbLignes nbColonnes tailleCases");
         }
         // une ExceptionFormat levee depuis lireCase est remontee telle quelle
+        return map;
     }
 
 
@@ -97,28 +110,29 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees d'une case.
      */
-    private void lireCase(int lig, int col) throws DataFormatException {
+    private NatureTerrain lireCase(int lig, int col) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Case (" + lig + "," + col + "): ");
+        //System.out.print("Case (" + lig + "," + col + "): ");
         String chaineNature = new String();
-        //		NatureTerrain nature;
+        NatureTerrain nature;
 
         try {
             chaineNature = scanner.next();
             // si NatureTerrain est un Enum, vous pouvez recuperer la valeur
             // de l'enum a partir d'une String avec:
-            //			NatureTerrain nature = NatureTerrain.valueOf(chaineNature);
+            nature = NatureTerrain.valueOf(chaineNature);
 
             verifieLigneTerminee();
 
-            System.out.print("nature = " + chaineNature);
+            //System.out.print("nature = " + chaineNature);
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format de case invalide. "
                     + "Attendu: nature altitude [valeur_specifique]");
         }
 
-        System.out.println();
+        //System.out.println();
+        return nature;
     }
 
 
