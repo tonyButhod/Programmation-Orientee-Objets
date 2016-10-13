@@ -9,7 +9,9 @@ import objects.Direction;
 import objects.NatureTerrain;
 import objects.Case;
 import objects.Carte;
-
+import objects.DonneesSimulation;
+import objects.Incendie;
+import objects.Robot;
 
 
 /**
@@ -42,18 +44,23 @@ public class LecteurDonnees {
      * LecteurDonnees.lire(fichierDonnees)
      * @param fichierDonnees nom du fichier à lire
      */
-    public static Carte lire(String fichierDonnees)
-    //Cette fonction renvoie Carte : temporaire pour les tests
-    //Elle devra renvoyer DonneesSimulation
+    public static DonneesSimulation lire(String fichierDonnees)
+    // Liste de Robots créée temporairement, à enlever lors de
+    // l'implémentation de lireRobots()
         throws FileNotFoundException, DataFormatException {
-        System.out.println("\n == Lecture du fichier " + fichierDonnees);
-        LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
-        Carte map = lecteur.lireCarte();
-        lecteur.lireIncendies();
-        //lecteur.lireRobots();
-        scanner.close();
-        System.out.println("\n == Lecture terminee");
-        return map;
+	        System.out.println("\n == Lecture du fichier " + fichierDonnees);
+	        LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
+	        Carte map = lecteur.lireCarte();
+	        List<Incendie> incendies = lecteur.lireIncendies(map);
+	        //lecteur.lireRobots();
+	        // TEMP
+	        List<Robot> robots = null;
+	        
+	    	DonneesSimulation donnees = new DonneesSimulation(map, incendies, robots);
+	        
+	        scanner.close();
+	        System.out.println("\n == Lecture terminee");
+	        return donnees;
     }
 
 
@@ -139,16 +146,16 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des incendies.
      */
-    private List<Incendie> lireIncendies() throws DataFormatException {
+    private List<Incendie> lireIncendies(Carte map) throws DataFormatException {
         ignorerCommentaires();
         
-        List<Incendie> Incendies = new ArrayList<Incendie>();
+        List<Incendie> incendies = new ArrayList<Incendie>();
         
         try {
             int nbIncendies = scanner.nextInt();
             //System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
-                Incendies.add(lireIncendie(i));
+                incendies.add(lireIncendie(map, i));
             }
 
         } catch (NoSuchElementException e) {
@@ -156,7 +163,7 @@ public class LecteurDonnees {
                     + "Attendu: nbIncendies");
         }
         
-        return Incendies;
+        return incendies;
     }
 
 
@@ -164,7 +171,7 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme incendie.
      * @param i
      */
-    private Incendie lireIncendie(int i) throws DataFormatException {
+    private Incendie lireIncendie(Carte map, int i) throws DataFormatException {
         ignorerCommentaires();
         //System.out.print("Incendie " + i + ": ");
         Case pos;
@@ -180,7 +187,7 @@ public class LecteurDonnees {
             }
             verifieLigneTerminee();
 
-            pos = getCase(lig, col);
+            pos = map.getCase(lig, col);
             feu = new Incendie(pos, intensite);
 
             /*System.out.println("position = (" + lig + "," + col
