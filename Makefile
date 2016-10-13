@@ -32,8 +32,6 @@ testLecture: src/TestLecteurDonnees.java
 
 TestCase: src/TestCase.java
 	javac -d bin -sourcepath src src/TestCase.java
-	javac -d bin -sourcepath src src/objects/Case.java
-	javac -d bin -sourcepath src src/objects/NatureTerrain.java
 
 TestCarte: io objects src/TestCarte.java
 	javac -d bin -sourcepath src src/TestCarte.java
@@ -41,7 +39,7 @@ TestCarte: io objects src/TestCarte.java
 io: src/io/LecteurDonnees.java
 	javac -d bin -sourcepath src $<
 
-objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/Case.java src/objects/Carte.java
+objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/Case.java src/objects/Carte.java src/objects/DonneesSimulation.java
 	javac -d bin -sourcepath src $^
 
 TestIncendie: objects src/TestIncendie.java
