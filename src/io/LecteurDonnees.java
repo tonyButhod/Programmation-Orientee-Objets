@@ -49,7 +49,7 @@ public class LecteurDonnees {
         System.out.println("\n == Lecture du fichier " + fichierDonnees);
         LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
         Carte map = lecteur.lireCarte();
-        //lecteur.lireIncendies();
+        lecteur.lireIncendies();
         //lecteur.lireRobots();
         scanner.close();
         System.out.println("\n == Lecture terminee");
@@ -139,19 +139,24 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des incendies.
      */
-    private void lireIncendies() throws DataFormatException {
+    private List<Incendie> lireIncendies() throws DataFormatException {
         ignorerCommentaires();
+        
+        List<Incendie> Incendies = new ArrayList<Incendie>();
+        
         try {
             int nbIncendies = scanner.nextInt();
-            System.out.println("Nb d'incendies = " + nbIncendies);
+            //System.out.println("Nb d'incendies = " + nbIncendies);
             for (int i = 0; i < nbIncendies; i++) {
-                lireIncendie(i);
+                Incendies.add(lireIncendie(i));
             }
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("Format invalide. "
                     + "Attendu: nbIncendies");
         }
+        
+        return Incendies;
     }
 
 
@@ -159,9 +164,11 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme incendie.
      * @param i
      */
-    private void lireIncendie(int i) throws DataFormatException {
+    private Incendie lireIncendie(int i) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Incendie " + i + ": ");
+        //System.out.print("Incendie " + i + ": ");
+        Case pos;
+        Incendie feu;
 
         try {
             int lig = scanner.nextInt();
@@ -169,17 +176,21 @@ public class LecteurDonnees {
             int intensite = scanner.nextInt();
             if (intensite <= 0) {
                 throw new DataFormatException("incendie " + i
-                        + "nb litres pour eteindre doit etre > 0");
+                                              + "nb litres pour eteindre doit etre > 0");
             }
             verifieLigneTerminee();
 
-            System.out.println("position = (" + lig + "," + col
-                    + ");\t intensite = " + intensite);
+            pos = getCase(lig, col);
+            feu = new Incendie(pos, intensite);
+
+            /*System.out.println("position = (" + lig + "," + col
+              + ");\t intensite = " + intensite);*/
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("format d'incendie invalide. "
-                    + "Attendu: ligne colonne intensite");
+                                          + "Attendu: ligne colonne intensite");
         }
+        return feu;
     }
 
 
