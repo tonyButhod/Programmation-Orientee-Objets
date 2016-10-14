@@ -5,7 +5,7 @@
 
 package objects;
 public class Incendie {
-    public Case position;
+    private Case position;
     private int litresEau;
 
     public int getLitresEau() {
@@ -13,10 +13,18 @@ public class Incendie {
     }
 
     public void setLitresEau(int ltr) {
-        if (ltr < 0) {
-            throw new IllegalArgumentException("Invariant sur le litres d'eau nécessaires pour un incendie non respecte (>= 0)");
+        if (ltr <= 0) {
+            throw new IllegalArgumentException("Invariant sur le litres d'eau nécessaires pour un incendie non respecte (> 0)");
         }
         this.litresEau = ltr;
+    }
+
+    public Case getPosition() {
+        return this.position;
+    }
+
+    public void setPosition(Case pos) {
+        this.position = pos;
     }
 
     /* Construit un incendie */

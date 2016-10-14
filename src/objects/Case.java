@@ -30,6 +30,11 @@ public class Case {
 	public NatureTerrain getNature(){
 		return this.nature;
 	}
+
+    public void setNature(NatureTerrain NT) {
+        this.nature = NT;
+    }
+
 	@Override
 	public String toString(){
 		return ("Case " + this.ligne + " " + this.colonne + " de nature " + this.nature);
