@@ -1,5 +1,6 @@
 package objects;
-public abstract class Robot {
+/**Robot est une classe en partie abstraite*/
+abstract class Robot {
         //Attributs Robot à définir
         private Case position;
         protected double vitesse; //Necessaire pour changer valeur par défault
@@ -14,11 +15,18 @@ public abstract class Robot {
         	this.position = c;
         }
 
-        public abstract double getVitesse(NatureTerrain NT);
+        public double getVitesse(NatureTerrain NT);
 
-        public abstract void deverserEau(int vol);
+        public void deverserEau(int vol){
+        	if (vol > this.volEau){
+        		throw new IllegalArgumentException("Volume d'eau insuffisant!");
+        	}else{
+        		this.volEau -= vol;
+        	}
+        }
 
-        public abstract void remplirReservoir();
+        public void remplirReservoir();
+        	this.volEau = this.volEauMax;
 
         //Rajouter des nouvelles méthodes si nécessaires
 }
