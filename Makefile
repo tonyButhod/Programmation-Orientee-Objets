@@ -33,14 +33,17 @@ testLecture: src/TestLecteurDonnees.java
 TestCase: src/TestCase.java
 	javac -d bin -sourcepath src src/TestCase.java
 
-TestCarte: io objects src/TestCarte.java
-	javac -d bin -sourcepath src src/TestCarte.java
+TestCarte: io objects animation src/TestCarte.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarte.java
 
 io: src/io/LecteurDonnees.java
 	javac -d bin -sourcepath src $<
 
 objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/Case.java src/objects/Carte.java src/objects/DonneesSimulation.java
 	javac -d bin -sourcepath src $^
+
+animation: src/animation/Affichage.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 TestIncendie: objects src/TestIncendie.java
 	javac -d bin -sourcepath src src/TestIncendie.java
@@ -60,10 +63,10 @@ exeTestCase:
 	java -classpath bin TestCase
 
 exeTestCarte: TestCarte
-	java -classpath bin TestCarte
+	java -classpath bin:bin/gui.jar TestCarte
 
 exeTestIncendie:
 	java -classpath bin TestIncendie
 
 clean:
-	rm -rf bin/*.class bin/io/*.class bin/objects/*.class  src/*~ src/objects/*~
+	rm -rf bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class src/*~ src/objects/*~ src/animation/*~
