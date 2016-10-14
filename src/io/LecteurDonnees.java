@@ -54,7 +54,7 @@ public class LecteurDonnees {
 	        List<Incendie> incendies = lecteur.lireIncendies(map);
 	        //lecteur.lireRobots();
 	        // TEMP
-	        List<Robot> robots = null;
+	        List<Robot> robots = lecteur.lireRobots(map);
 	        
 	    	DonneesSimulation donnees = new DonneesSimulation(map, incendies, robots);
 	        
@@ -204,19 +204,23 @@ public class LecteurDonnees {
     /**
      * Lit et affiche les donnees des robots.
      */
-    private void lireRobots() throws DataFormatException {
+    private List<Robot> lireRobots(Carte map) throws DataFormatException {
         ignorerCommentaires();
+        List<Robot> robots = new ArrayList<Robot>();
         try {
             int nbRobots = scanner.nextInt();
-            System.out.println("Nb de robots = " + nbRobots);
-            for (int i = 0; i < nbRobots; i++) {
-                lireRobot(i);
-            }
+            
+            //System.out.println("Nb de robots = " + nbRobots);
+            
+			for (int i = 0; i < nbRobots; i++) {
+				robots.add(lireRobot(i,map));
+			}
 
         } catch (NoSuchElementException e) {
             throw new DataFormatException("Format invalide. "
                     + "Attendu: nbRobots");
         }
+        return null;
     }
 
 
@@ -224,14 +228,13 @@ public class LecteurDonnees {
      * Lit et affiche les donnees du i-eme robot.
      * @param i
      */
-    private void lireRobot(int i) throws DataFormatException {
+    private Robot lireRobot(int i, Carte map) throws DataFormatException {
         ignorerCommentaires();
-        System.out.print("Robot " + i + ": ");
-
+        
         try {
             int lig = scanner.nextInt();
             int col = scanner.nextInt();
-            System.out.print("position = (" + lig + "," + col + ");");
+            
             String type = scanner.next();
 
             System.out.print("\t type = " + type);
@@ -256,6 +259,7 @@ public class LecteurDonnees {
             throw new DataFormatException("format de robot invalide. "
                     + "Attendu: ligne colonne type [valeur_specifique]");
         }
+        return null;
     }
 
 
