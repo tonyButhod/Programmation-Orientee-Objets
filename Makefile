@@ -23,10 +23,10 @@
 
 all: testInvader testLecture 
 
-testInvader: src/TestInvader.java
+TestInvader: src/TestInvader.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestInvader.java
 
-testLecture: src/TestLecteurDonnees.java
+TestLecture: src/TestLecteurDonnees.java
 	javac -d bin -sourcepath src src/TestLecteurDonnees.java
 
 
@@ -44,6 +44,9 @@ objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/C
 
 TestIncendie: objects src/TestIncendie.java
 	javac -d bin -sourcepath src src/TestIncendie.java
+
+TestDonnees: objects src/TestDonnees.java
+	javac -d bin -sourcepath src src/TestDonnees.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -64,6 +67,9 @@ exeTestCarte: TestCarte
 
 exeTestIncendie:
 	java -classpath bin TestIncendie
+
+exeTestDonnees:
+	java -classpath bin TestDonnees
 
 clean:
 	rm -rf bin/*.class bin/io/*.class bin/objects/*.class  src/*~ src/objects/*~
