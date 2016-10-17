@@ -15,8 +15,11 @@ public class TestDonnees {
             List<objects.Robot> robots = donnees.getRobots();
             System.out.println("Map : "+map.getNbLignes()+"x"+map.getNbColonnes()+", tailleCases : "+map.getTailleCases());
             System.out.println(map.getCase(7,3));
-            System.out.println("Incendies : " + incendies.size() + " incendies, 3eme à la case " + incendies.get(2).getPosition() + " d'intensite " + incendies.get(2).getLitresEau());
-            System.out.println("Nombre de robots: " +robots.size() + "\n");
+            System.out.println("\n\nNombre d'incendies : " + incendies.size());
+            for (int i=0; i<incendies.size(); i++){
+            		System.out.println("Incendie numéro " + i + " à la " + incendies.get(i).getPosition().toString() + " d'intensite " + incendies.get(i).getLitresEau());
+            }
+            System.out.println("\n\nNombre de robots: " +robots.size() + "\n");
             for (int i=0; i<robots.size();i++){
             	System.out.println(robots.get(i));     
             }

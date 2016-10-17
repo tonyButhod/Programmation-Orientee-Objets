@@ -11,7 +11,7 @@ public class Patte extends Robot {
 
 	public double getVitesse(NatureTerrain NT) {
 		if (NT == NatureTerrain.ROCHE) {
-			return super.vitesse - 10;
+			return 10.0;
 		}
 		return super.vitesse;
 	}
