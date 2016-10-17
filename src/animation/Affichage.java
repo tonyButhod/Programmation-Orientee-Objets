@@ -50,13 +50,13 @@ public class Affichage implements Simulable {
                 NatureTerrain nature = carte.getCase(i,j).getNature();
                 Color couleur = Color.BLACK;
                 if (nature == NatureTerrain.EAU) {
-                    couleur = Color.BLUE;
+                    couleur = Color.decode("#0000ef");
                 }
                 else if (nature == NatureTerrain.ROCHE) {
-                    couleur = Color.ORANGE;
+                    couleur = Color.decode("#934d00");
                 }
                 else if (nature == NatureTerrain.FORET) {
-                    couleur = Color.GREEN;
+                    couleur = Color.decode("#006b00");
                 }
                 else if (nature == NatureTerrain.TERRAIN_LIBRE) {
                     couleur = Color.WHITE;
