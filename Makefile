@@ -50,6 +50,8 @@ TestIncendie: objects src/TestIncendie.java
 
 TestDonnees: objects src/TestDonnees.java
 	javac -d bin -sourcepath src src/TestDonnees.java
+TestRobot: objects src/TestRobot.java
+	javac -d bin -sourcepath src src/TestRobot.java
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -73,6 +75,8 @@ exeTestIncendie:
 
 exeTestDonnees:
 	java -classpath bin TestDonnees
+exeTestRobot:
+	java -classpath bin TestRobot
 
 clean:
 	rm -rf bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class src/*~ src/objects/*~ src/animation/*~
