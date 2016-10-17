@@ -15,13 +15,11 @@ public class TestCarte {
 
     public static void main(String[] args) {
         try {
-            Carte map = LecteurDonnees.lire("cartes/carteSujet.map");
+            DonneesSimulation DS = LecteurDonnees.lire("cartes/desertOfDeath-20x20.map");
+            Carte map = DS.getCarte();
             System.out.println("Map : "+map.getNbLignes()+"x"+map.getNbColonnes()+", tailleCases : "+map.getTailleCases());
             System.out.println(map.getCase(7,3));
-            DonneesSimulation DS = new DonneesSimulation(map, null, null);
-            System.out.println("Ok !");
-            Affichage aff = new Affichage(DS, 50);
-            System.out.println("C'est bon !");
+            Affichage aff = new Affichage(DS, 30);
         } 
         catch (FileNotFoundException e) {
             System.out.println(e);
