@@ -8,6 +8,7 @@ public class Simulateur {
 
     public Simulateur() {
         this.dateSimulation = 0;
+        this.evenements = new LinkedList<Evenement>();
     }
 
     public void ajouteEvenement(Evenement e) {
@@ -28,5 +29,15 @@ public class Simulateur {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String out = "Affichage de la liste triée : ";
+        ListIterator<Evenement> le = evenements.listIterator();
+        while (le.hasNext()) {
+            out += le.next().getDate()+" ";
+        }
+        return out;
     }
 }

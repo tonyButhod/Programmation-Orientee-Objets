@@ -40,6 +40,9 @@ TestCase: src/TestCase.java
 TestCarte: io objects animation src/TestCarte.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarte.java
 
+TestSimu: objects animation src/TestSimulateur.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
+
 io: $(IO)
 	javac -d bin -sourcepath src $^
 
@@ -74,6 +77,9 @@ exeTestCase:
 
 exeTestCarte: TestCarte
 	java -classpath bin:bin/gui.jar TestCarte
+
+exeTestSimu: TestSimu
+	java -classpath bin:bin/gui.jar TestSimulateur
 
 exeTestIncendie:
 	java -classpath bin TestIncendie
