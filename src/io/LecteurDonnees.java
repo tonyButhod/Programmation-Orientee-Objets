@@ -241,13 +241,13 @@ public class LecteurDonnees {
                 System.out.print(vitesse);
             }
             if (type.equals("DRONE")){
-            	robot = new Drone(defvit(100, vitesse, s), pos);
+            	robot = new Drone(pos, map, defvit(100, vitesse, s));
             }else if (type.equals("PATTES")){
-            	robot = new Patte(pos);
+            	robot = new Patte(pos, map);
             }else if (type.equals("ROUES")){
-            	robot = new Roue(defvit(80, vitesse, s), pos);
+            	robot = new Roue(pos, map, defvit(80, vitesse, s));
             }else if (type.equals("CHENILLES")){
-            	robot = new Chenille(defvit(60, vitesse, s), pos);
+            	robot = new Chenille(pos, map, defvit(60, vitesse, s));
             }else{
             	throw new IllegalArgumentException("Type de robot inconnu !");
             }

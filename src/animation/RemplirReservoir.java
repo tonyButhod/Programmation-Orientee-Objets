@@ -3,7 +3,12 @@ package animation;
 import objects.Robot;
 
 public class RemplirReservoir extends Evenement {
-	Robot robot;
+	private Robot robot;
+	
+	public RemplirReservoir(long date, Robot robot){
+		super(date);
+		this.robot = robot;
+	}
 
 	@Override
 	public void execute(){

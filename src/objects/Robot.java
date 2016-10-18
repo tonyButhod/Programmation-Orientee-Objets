@@ -5,9 +5,11 @@ public abstract class Robot {
         private Case position;
         protected double vitesse; //Necessaire pour changer valeur par défault
         protected double vitDever;  //vitesses en litres pas seconde
+        private Carte carte;
         
-        public Robot (Case position){
+        public Robot (Case position, Carte carte){
         	this.position = position;
+        	this.carte = carte;
         }
 
         public Case getPosition(){
@@ -19,6 +21,10 @@ public abstract class Robot {
         }
         public double getVitDever(){
         	return this.vitDever;
+        }
+        
+        public Carte getCarte(){
+        	return this.carte;
         }
 
         //public abstract double getVitesse(NatureTerrain NT);

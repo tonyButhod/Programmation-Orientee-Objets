@@ -2,9 +2,9 @@ package objects;
 
 public class Chenille extends RobotEau {
 
-	public Chenille(double vitesse, Case position) {
+	public Chenille(Case position, Carte carte, double vitesse) {
 		
-		super(position, 2000);
+		super(position, carte, 2000);
 		
 		if (vitesse > 80 || vitesse < 0) {
 			System.out.println("Vitesse trop élevée -> vitesse par défault");

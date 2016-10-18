@@ -2,9 +2,9 @@ package objects;
 
 public class Patte extends Robot {
 
-	public Patte(Case position) {
+	public Patte(Case position, Carte carte) {
 
-		super(position);
+		super(position, carte);
 		this.vitesse = 30;
 		this.vitDever = 10.0;
 	}

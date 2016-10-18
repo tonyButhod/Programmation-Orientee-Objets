@@ -6,9 +6,9 @@ public class RobotEau extends Robot {
 	protected int volEauMax;
 	protected double vitRemp;  //double car vitesse non entières
 
-	public RobotEau (Case position, int volEauMax){
+	public RobotEau (Case position, Carte carte, int volEauMax){
 		
-		super(position);
+		super(position, carte);
 		this.volEau = 0; //Par défault une robot est vide.
 		this.volEauMax = volEauMax;
 	}

@@ -2,9 +2,9 @@ package objects;
 
 public class Drone extends RobotEau {
 	
-	public Drone(double vitesse, Case position) {
+	public Drone(Case position, Carte carte, double vitesse) {
 		
-		super(position, 10000);
+		super(position, carte, 10000);
 		
 		if (vitesse > 150 || vitesse <0){
 			System.out.println("Vitesse trop élevée -> vitesse par défault");

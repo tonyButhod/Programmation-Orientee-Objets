@@ -2,9 +2,9 @@ package objects;
 
 public class Roue extends RobotEau {
 
-	public Roue(double vitesse, Case position) {
+	public Roue(Case position, Carte carte, double vitesse) {
 
-		super(position, 5000);
+		super(position, carte, 5000);
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");
