@@ -21,6 +21,10 @@
 #   -classpath : repertoire dans lequel sont cherches les .class deja compiles
 #   -sourcepath : repertoire dans lequel sont cherches les .java (dependances)
 
+OBJ:=$(wildcard src/objects/*.java)
+IO:=$(wildcard src/io/*.java)
+ANIM:=$(wildcard src/animation/*.java)
+
 all: testInvader testLecture 
 
 TestInvader: src/TestInvader.java
@@ -36,13 +40,16 @@ TestCase: src/TestCase.java
 TestCarte: io objects animation src/TestCarte.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestCarte.java
 
-io: src/io/LecteurDonnees.java
-	javac -d bin -sourcepath src $<
+TestSimu: objects animation src/TestSimulateur.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 
-objects: src/objects/NatureTerrain.java src/objects/Direction.java src/objects/Case.java src/objects/Carte.java src/objects/DonneesSimulation.java
+io: $(IO)
 	javac -d bin -sourcepath src $^
 
-animation: src/animation/Affichage.java
+objects: $(OBJ)
+	javac -d bin -sourcepath src $^
+
+animation: $(ANIM)
 	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 TestIncendie: objects src/TestIncendie.java
@@ -50,6 +57,7 @@ TestIncendie: objects src/TestIncendie.java
 
 TestDonnees: objects src/TestDonnees.java
 	javac -d bin -sourcepath src src/TestDonnees.java
+
 TestRobot: objects src/TestRobot.java
 	javac -d bin -sourcepath src src/TestRobot.java
 
@@ -70,11 +78,15 @@ exeTestCase:
 exeTestCarte: TestCarte
 	java -classpath bin:bin/gui.jar TestCarte
 
+exeTestSimu: TestSimu
+	java -classpath bin:bin/gui.jar TestSimulateur
+
 exeTestIncendie:
 	java -classpath bin TestIncendie
 
 exeTestDonnees:
 	java -classpath bin TestDonnees
+
 exeTestRobot:
 	java -classpath bin TestRobot
 
