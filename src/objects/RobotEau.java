@@ -1,6 +1,6 @@
 package objects;
 
-public class RobotEau extends Robot {
+public abstract class RobotEau extends Robot {
 	
 	protected int volEau;
 	protected int volEauMax;
@@ -21,6 +21,8 @@ public class RobotEau extends Robot {
 			this.volEau = volEau;
 		}
 	}
+
+    public abstract double getVitesse(NatureTerrain NT);
 
 	public int getVolEau() {
 		return this.volEau;

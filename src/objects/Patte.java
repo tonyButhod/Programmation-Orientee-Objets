@@ -13,6 +13,9 @@ public class Patte extends Robot {
 		if (NT == NatureTerrain.ROCHE) {
 			return 10.0;
 		}
+		else if (NT == NatureTerrain.EAU) {
+			return -1;
+		}
 		return super.vitesse;
 	}
 	
