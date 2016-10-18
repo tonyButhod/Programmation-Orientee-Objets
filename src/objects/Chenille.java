@@ -24,6 +24,7 @@ public class Chenille extends RobotEau {
 		return super.vitesse;
 	}
 
+	@Override
 	public String toString(){
     		return ("Robot à chenilles " + super.toString() + 
 				" \n vitesse remplissage : " + vitRemp + 

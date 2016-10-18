@@ -18,9 +18,9 @@ public class Drone extends RobotEau {
 	}
 
 	public double getVitesse(NatureTerrain NT) {
-		return super.vitesse;	
+			return super.vitesse;
 	}
-		
+	@Override	
 	public String toString(){
 		return ("Drone " + super.toString() + 
 				" \n vitesse remplissage : " + vitRemp + 

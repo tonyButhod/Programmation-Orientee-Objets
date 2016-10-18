@@ -20,6 +20,7 @@ public class Roue extends RobotEau {
 		return super.vitesse;
 	}
 
+	@Override
 	public String toString() {
 		return ("Robot à roues " + super.toString() + " \n vitesse remplissage : " + vitRemp + " \n volume dispo :"
 				+ volEau + " \n sur " + volEauMax + "\n");

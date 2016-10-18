@@ -16,6 +16,7 @@ public class Patte extends Robot {
 		return super.vitesse;
 	}
 	
+	@Override
 	public String toString() {
 		return ("Robot à pattes " + super.toString() + "\n");
 	}

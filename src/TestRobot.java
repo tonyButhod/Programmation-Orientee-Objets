@@ -25,6 +25,8 @@ public class TestRobot {
 		
 		Roue roue2 = new Roue(50, position);
 		System.out.println(roue2);
+		double vitesse = drone1.getVitesse(NatureTerrain.FORET);
+		System.out.println(vitesse);
 		//Robot robot1 = new Robot(position);  Ne marche pas (classe abstraite)
 		//System.out.println(robot1);
 	}
