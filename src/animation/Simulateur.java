@@ -95,8 +95,8 @@ public class Simulateur implements Simulable {
 				gui.addGraphicalElement(new Rectangle((int) ((j+0.5)*lenCase), (int) ((i+0.5)*lenCase), couleur, couleur, lenCase));
 			}
 		}
-		drawRobots();
 		drawIncendies();
+		drawRobots();
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class Simulateur implements Simulable {
 			// lenCase, position.getColonne() * lenCase,"robot.png", lenCase,
 			// lenCase, io));
 			gui.addGraphicalElement(new Oval((int) ((position.getColonne()+0.5)*lenCase),
-					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase / 2));
+					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase / 3));
 		}
 	}
 
