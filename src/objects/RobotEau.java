@@ -9,8 +9,8 @@ public class RobotEau extends Robot {
 	public RobotEau (Case position, Carte carte, int volEauMax){
 		
 		super(position, carte);
-		this.volEau = 0; //Par défault une robot est vide.
-		this.volEauMax = volEauMax;
+		setVolEau(0); //Par défault une robot est vide.
+		this.volEauMax = volEauMax; //pas besoin de constructeur, non modifiable.
 	}
 
 	public void setVolEau(int volEau){
@@ -25,7 +25,13 @@ public class RobotEau extends Robot {
 	public int getVolEau() {
 		return this.volEau;
 	}
+	
+	public double getVolEauMax(){
+		return this.volEauMax;
+	}
+	
 	public double getvitRemp(){
 		return this.vitRemp;
 	}
+	
 }

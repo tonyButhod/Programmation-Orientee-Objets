@@ -4,26 +4,27 @@ public class TestRobot {
 	public static void main(String args[]) {
 		
 		Case position = new Case (30, 60, NatureTerrain.FORET);
+		Carte map = new Carte (10,10,30);
 		
-		Drone drone1 = new Drone(110, position);
+		Drone drone1 = new Drone(position, map, 110);
 		System.out.println(drone1);
 		
-		Drone drone2 = new Drone(100, position);
+		Drone drone2 = new Drone(position, map, 100);
 		System.out.println(drone2);
 		
-		Patte patte1 = new Patte(position);
+		Patte patte1 = new Patte(position, map);
 		System.out.println(patte1);
 		
-		Chenille chenille1 = new Chenille(110, position);
+		Chenille chenille1 = new Chenille(position, map, 110);
 		System.out.println(chenille1);
 		
-		Chenille chenille2 = new Chenille(50, position);
+		Chenille chenille2 = new Chenille(position, map, 50);
 		System.out.println(chenille2);
 		
-		Roue roue1 = new Roue(110, position);
+		Roue roue1 = new Roue(position, map, 100);
 		System.out.println(roue1);
 		
-		Roue roue2 = new Roue(50, position);
+		Roue roue2 = new Roue(position, map, 50);
 		System.out.println(roue2);
 		double vitesse = drone1.getVitesse(NatureTerrain.FORET);
 		System.out.println(vitesse);
