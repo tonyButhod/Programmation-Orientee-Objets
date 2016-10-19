@@ -1,11 +1,12 @@
-package animation;
+package strategie;
 
 import objects.*;
+import animation.*;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-public class Strategie {
+public class Dijkstra {
 
     public static long tempsMin(Robot robot, Case end) {
         Carte map = robot.getCarte();
