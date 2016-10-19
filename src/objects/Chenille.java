@@ -21,6 +21,9 @@ public class Chenille extends RobotEau {
 		if (NT == NatureTerrain.FORET) {
 			return 0.5 * super.vitesse;
 		}
+		else if (NT == NatureTerrain.EAU || NT == NatureTerrain.ROCHE) {
+			return -1;
+		}
 		return super.vitesse;
 	}
 

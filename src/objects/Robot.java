@@ -27,7 +27,7 @@ public abstract class Robot {
         	return this.carte;
         }
 
-        //public abstract double getVitesse(NatureTerrain NT);
+        public abstract double getVitesse(NatureTerrain NT);
 
         //public abstract void deverserEau(int vol);
         	

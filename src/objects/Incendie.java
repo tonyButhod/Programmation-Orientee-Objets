@@ -14,7 +14,7 @@ public class Incendie {
 
     public void setLitresEau(int ltr) {
         if (ltr <= 0) {
-            throw new IllegalArgumentException("Invariant sur le litres d'eau nécessaires pour un incendie non respecte (> 0)");
+            throw new IllegalArgumentException("Invariant sur les litres d'eau nécessaires pour un incendie non respecte (> 0)");
         }
         this.litresEau = ltr;
     }
