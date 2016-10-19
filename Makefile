@@ -43,6 +43,9 @@ TestCarte: io objects animation src/TestCarte.java
 TestSimu: objects animation src/TestSimulateur.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 
+TestDeplacement: io objects animation src/TestDeplacement.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDeplacement.java
+
 io: $(IO)
 	javac -d bin -sourcepath src $^
 
@@ -80,6 +83,9 @@ exeTestCarte: TestCarte
 
 exeTestSimu: TestSimu
 	java -classpath bin:bin/gui.jar TestSimulateur
+
+exeTestDeplacement:
+	java -classpath bin:bin/gui.jar TestDeplacement
 
 exeTestIncendie:
 	java -classpath bin TestIncendie

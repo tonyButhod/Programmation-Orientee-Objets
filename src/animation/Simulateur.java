@@ -68,6 +68,7 @@ public class Simulateur implements Simulable {
 		while (e != null && e.getDate() <= dateSimulation) {
 			e.execute();
 			e = le.hasNext() ? le.next() : null;
+			evenements.remove();
 		}
 		incrementeDate();
 		draw();

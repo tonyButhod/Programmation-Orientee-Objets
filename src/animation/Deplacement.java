@@ -2,12 +2,17 @@ package animation;
 
 import objects.Robot;
 import objects.Case;
+import objects.Carte;
+import objects.Direction;
 
+/** Classe fournissant l'implémentation des Deplacements
+ *  La variable direction est du type enumere Direction
+	*/
 public class Deplacement extends Evenement {
 	private Robot robot;
-	private String direction;
+	private Direction direction;
 
-	public Deplacement(long date, Robot robot, String direction) {
+	public Deplacement(long date, Robot robot, Direction direction) {
 		super(date);
 		this.robot = robot;
 		this.direction = direction;
@@ -18,19 +23,22 @@ public class Deplacement extends Evenement {
 		Case nouvellePosition;
 		int lig = this.robot.getPosition().getLigne();
 		int col = this.robot.getPosition().getColonne();
+		Carte map = this.robot.getCarte();
 		switch (this.direction) {
-		case "N":
-			nouvellePosition = getCase(lig - 1, col);
+		case NORD:
+			nouvellePosition = map.getCase(lig - 1, col);
 			break;
-		case "S":
-			nouvellePosition = getCase(lig + 1, col);
+		case SUD:
+			nouvellePosition = map.getCase(lig + 1, col);
 			break;
-		case "E":
-			nouvellePosition = getCase(lig, col + 1);
+		case EST:
+			nouvellePosition = map.getCase(lig, col + 1);
 			break;
-		case "O":
-			nouvellePosition = getCase(lig, col - 1);
+		case OUEST:
+			nouvellePosition = map.getCase(lig, col - 1);
 			break;
+		default:
+			throw new IllegalArgumentException("Direction de déplacement non valide");
 		}
 		this.robot.setPosition(nouvellePosition);
 	}
