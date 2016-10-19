@@ -17,7 +17,12 @@ public class Roue extends RobotEau {
 	}
 
 	public double getVitesse(NatureTerrain NT) {
-		return super.vitesse;
+		if (NT == NatureTerrain.TERRAIN_LIBRE || NT == NatureTerrain.HABITAT) {
+			return super.vitesse;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	@Override

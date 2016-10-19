@@ -22,7 +22,7 @@ public class Simulateur implements Simulable {
 		this.gui = gui;
 		gui.setSimulable(this); // association a la gui!
 		this.donnees = donnees;
-		this.lenCase = 30;
+		this.lenCase = 15;
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
 
@@ -92,7 +92,7 @@ public class Simulateur implements Simulable {
 				} else if (nature == NatureTerrain.HABITAT) {
 					couleur = Color.GRAY;
 				}
-				gui.addGraphicalElement(new Rectangle(j * lenCase, i * lenCase, couleur, couleur, lenCase));
+				gui.addGraphicalElement(new Rectangle((int) ((j+0.5)*lenCase), (int) ((i+0.5)*lenCase), couleur, couleur, lenCase));
 			}
 		}
 		drawRobots();
@@ -121,7 +121,8 @@ public class Simulateur implements Simulable {
 			// gui.addGraphicalElement(new ImageElement(position.getLigne() *
 			// lenCase, position.getColonne() * lenCase,"robot.png", lenCase,
 			// lenCase, io));
-			gui.addGraphicalElement(new Oval((position.getLigne()+1/2) * lenCase, (position.getColonne()+1/2) * lenCase, couleur, couleur, lenCase / 2));
+			gui.addGraphicalElement(new Oval((int) ((position.getColonne()+0.5)*lenCase),
+					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase / 2));
 		}
 	}
 
@@ -133,7 +134,8 @@ public class Simulateur implements Simulable {
 
 		for (int i = 0; i < incendies.size(); i++) {
 			position = incendies.get(i).getPosition();
-			gui.addGraphicalElement(new Oval((position.getLigne()+1/2) * lenCase, (position.getColonne()+1/2) * lenCase, couleur, couleur, lenCase/2));
+			gui.addGraphicalElement(new Oval((int) ((position.getColonne()+0.5)*lenCase),
+					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase/2));
 
 		}
 	}
