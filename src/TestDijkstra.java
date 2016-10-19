@@ -24,6 +24,9 @@ public class TestDijkstra {
             System.out.println("Il atteint (0,9) en : " + temps1);
             System.out.println("Il atteint (4,12) en : " + temps2);
             Simulateur simu = new Simulateur(gui, DS);
+            if (Dijkstra.deplaceRobot(simu, robot, end1, 0)==-1) {
+                System.out.println("Déplacement impossible.");
+            }
         }
         catch (FileNotFoundException e) {
             System.out.println(e);
