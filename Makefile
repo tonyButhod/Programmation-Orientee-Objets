@@ -24,6 +24,7 @@
 OBJ:=$(wildcard src/objects/*.java)
 IO:=$(wildcard src/io/*.java)
 ANIM:=$(wildcard src/animation/*.java)
+STRAT:=$(wildcard src/strategie/*.java)
 
 all: testInvader testLecture 
 
@@ -54,6 +55,10 @@ TestRemplissage: io objects animation src/TestRemplissage.java
 TestStrat: objects animation src/TestStrategie.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestStrategie.java
 
+TestDijkstra: objects animation strategie src/TestDijkstra.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDijkstra.java
+
+
 
 io: $(IO)
 	javac -d bin -sourcepath src $^
@@ -62,6 +67,9 @@ objects: $(OBJ)
 	javac -d bin -sourcepath src $^
 
 animation: $(ANIM)
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
+
+strategie: $(STRAT)
 	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 TestIncendie: objects src/TestIncendie.java
@@ -102,6 +110,9 @@ exeTestRemplissage:
 exeTestStrat: TestStrat
 	java -classpath bin:bin/gui.jar TestStrategie
 
+exeTestDijkstra: TestDijkstra
+	java -classpath bin:bin/gui.jar TestDijkstra
+
 exeTestIncendie:
 	java -classpath bin TestIncendie
 
@@ -112,4 +123,4 @@ exeTestRobot:
 	java -classpath bin TestRobot
 
 clean:
-	rm -rf bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class src/*~ src/objects/*~ src/animation/*~
+	rm -rf bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~
