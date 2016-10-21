@@ -13,7 +13,7 @@ public class Roue extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 20.0;
-		this.vitRemp = (double) 1 / 12;
+		this.tempsRemp = 10*60; //+1 pour être juste après le fin du remplissage
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -24,10 +24,14 @@ public class Roue extends RobotEau {
 			return -1;
 		}
 	}
+	
+	public boolean peutSeRemplir(){
+		return this.eauCote();
+	}
 
 	@Override
 	public String toString() {
-		return ("Robot à roues " + super.toString() + " \n vitesse remplissage : " + vitRemp + " \n volume dispo :"
+		return ("Robot à roues " + super.toString() + " \n temps remplissage : " + tempsRemp + " \n volume dispo :"
 				+ volEau + " \n sur " + volEauMax + "\n");
 	}
 }

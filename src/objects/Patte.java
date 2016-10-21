@@ -7,6 +7,7 @@ public class Patte extends Robot {
 		super(position, carte);
 		this.vitesse = 30;
 		this.vitDever = 10.0;
+		this.tempsRemp =0;
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -17,6 +18,10 @@ public class Patte extends Robot {
 			return -1;
 		}
 		return super.vitesse;
+	}
+	
+	public boolean peutSeRemplir(){
+		return false;
 	}
 	
 	@Override

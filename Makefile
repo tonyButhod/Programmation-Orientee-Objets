@@ -47,6 +47,10 @@ TestSimu: objects animation src/TestSimulateur.java
 TestDeplacement: io objects animation src/TestDeplacement.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDeplacement.java
 
+TestRemplissage: io objects animation src/TestRemplissage.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestRemplissage.java
+
+
 TestStrat: objects animation src/TestStrategie.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestStrategie.java
 
@@ -91,6 +95,9 @@ exeTestSimu: TestSimu
 
 exeTestDeplacement:
 	java -classpath bin:bin/gui.jar TestDeplacement
+
+exeTestRemplissage:
+	java -classpath bin:bin/gui.jar TestRemplissage
 
 exeTestStrat: TestStrat
 	java -classpath bin:bin/gui.jar TestStrategie

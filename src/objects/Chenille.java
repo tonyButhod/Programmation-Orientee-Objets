@@ -13,8 +13,7 @@ public class Chenille extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 12.5;
-		this.vitRemp = (double) 2 / 3 * 10;
-
+		this.tempsRemp = 5*60; 
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -26,11 +25,15 @@ public class Chenille extends RobotEau {
 		}
 		return super.vitesse;
 	}
+	
+	public boolean peutSeRemplir(){
+		return this.eauCote();
+	}
 
 	@Override
 	public String toString(){
     		return ("Robot à chenilles " + super.toString() + 
-				" \n vitesse remplissage : " + vitRemp + 
+				" \n temps remplissage : " + tempsRemp + 
 				" \n volume dispo :" + volEau + 
 				" \n sur " + volEauMax + "\n");
 	}

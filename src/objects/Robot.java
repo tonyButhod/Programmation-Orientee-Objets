@@ -5,6 +5,7 @@ public abstract class Robot {
         private Case position;
         protected double vitesse; //Necessaire pour changer valeur par défault
         protected double vitDever;  //vitesses en litres pas seconde
+    	protected long tempsRemp;
         private Carte carte;
         
         public Robot (Case position, Carte carte){
@@ -28,7 +29,13 @@ public abstract class Robot {
         }
 
         public abstract double getVitesse(NatureTerrain NT);
+        
+    	public long getTempsRemp(){
+    		return this.tempsRemp;
+    	}
 
+        public abstract boolean peutSeRemplir();
+        
         //public abstract void deverserEau(int vol);
         	
         //public abstract void remplirReservoir();

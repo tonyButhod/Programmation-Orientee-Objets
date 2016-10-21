@@ -13,18 +13,23 @@ public class Drone extends RobotEau {
 			this.vitesse= vitesse;
 		}
 		this.vitDever = (double) 1/3 *1000;
-		this.vitRemp = 0.5555;
-		
+
+		this.tempsRemp = 30*60; //+1 pour être juste après le fin du remplissage
 	}
 
 	public double getVitesse(NatureTerrain NT) {
 			return super.vitesse;
 	}
 
+	public boolean peutSeRemplir(){
+		return (this.getPosition().getNature() == NatureTerrain.EAU);
+	}
+
+	
 	@Override	
 	public String toString(){
 		return ("Drone " + super.toString() + 
-				" \n vitesse remplissage : " + vitRemp + 
+				" \n temps remplissage : " + tempsRemp + 
 				" \n volume dispo :" + volEau +
     			" \n sur " + volEauMax + "\n");
 	}
