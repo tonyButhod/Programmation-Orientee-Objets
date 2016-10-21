@@ -26,10 +26,10 @@ public class TestRemplissage {
             Evenement remp = new RemplirReservoir(35, DS.getRobots().get(1),aff);
             
             System.out.println(DS.getRobots().get(1));
-            Evenement dE1 = new Deplacement(35 + ((RobotEau)(DS.getRobots().get(1))).getTempsRemp(), DS.getRobots().get(1), Direction.EST);
+            Evenement dE1 = new Deplacement(robot.getDateOccupe() + 1, DS.getRobots().get(1), Direction.EST);
             
             System.out.println(DS.getRobots().get(1));
-            Evenement dE2 = new Deplacement(50, DS.getRobots().get(1), Direction.EST);
+            Evenement dE2 = new Deplacement(robot.getDateOccupe() + 5, DS.getRobots().get(1), Direction.EST);
 
             aff.ajouteEvenement(dO2);
             

@@ -19,8 +19,11 @@ public class RemplirReservoir extends Evenement {
 																// de
 																// remplissage.
 		if (robot.peutSeRemplir()) {
-			Evenement rempli = new ReservoirRempli(this.getDate() + tmps,robot); //robot disponible après avoir complètement rempli son reservoir
+			Evenement rempli = new ReservoirRempli(this.getDate() + temps,robot); //robot disponible après avoir complètement rempli son reservoir
+			robot.setDateOccupe(this.getDate() + temps); // blocage ajout évènement lors du remplissage
 			this.simu.ajouteEvenement(rempli);
+		}else{
+			System.out.println("Le robot ne peut pas se remplir ! ");
 		}
 	}
 

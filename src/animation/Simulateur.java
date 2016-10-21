@@ -30,14 +30,18 @@ public class Simulateur implements Simulable {
 	}
 
 	public void ajouteEvenement(Evenement e) {
-		ListIterator<Evenement> le = evenements.listIterator();
-		while (le.hasNext()) {
-			if (le.next().getDate() > e.getDate()) {
-				le.previous();
-				break;
+		if (e.getRobot().getDateOccupe() < this.dateSimulation) {
+			ListIterator<Evenement> le = evenements.listIterator();
+			while (le.hasNext()) {
+				if (le.next().getDate() > e.getDate()) {
+					le.previous();
+					break;
+				}
 			}
+			le.add(e);
+		} else {
+			System.out.println("robot occupé ! Evenement non ajouté");
 		}
-		le.add(e);
 	}
 
 	public void incrementeDate() {

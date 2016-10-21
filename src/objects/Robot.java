@@ -7,10 +7,12 @@ public abstract class Robot {
         protected double vitDever;  //vitesses en litres pas seconde
     	protected long tempsRemp;
         private Carte carte;
+        long dateOccupe;
         
         public Robot (Case position, Carte carte){
         	this.position = position;
         	this.carte = carte;
+        	setDateOccupe(0); //le robot est libre des le début de la simalation
         }
 
         public Case getPosition(){
@@ -32,6 +34,14 @@ public abstract class Robot {
         
     	public long getTempsRemp(){
     		return this.tempsRemp;
+    	}
+    	
+    	public long getDateOccupe(){
+    		return this.dateOccupe;
+    	}
+    	
+    	public void setDateOccupe(long date){
+    		this.dateOccupe = date;
     	}
 
         public abstract boolean peutSeRemplir();
