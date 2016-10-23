@@ -1,4 +1,5 @@
 package objects;
+
 /**Robot est une classe en partie abstraite*/
 public abstract class Robot {
         //Attributs Robot à définir
@@ -12,7 +13,7 @@ public abstract class Robot {
         public Robot (Case position, Carte carte){
         	this.position = position;
         	this.carte = carte;
-        	setDateOccupe(0); //le robot est libre des le début de la simalation
+        	setDateOccupe(-1); //le robot est libre des le début de la simalation
         }
 
         public Case getPosition(){
@@ -46,7 +47,7 @@ public abstract class Robot {
 
         public abstract boolean peutSeRemplir();
         
-        //public abstract void deverserEau(int vol);
+        public abstract boolean deverserEau(Incendie incendie);
         	
         //public abstract void remplirReservoir();
 

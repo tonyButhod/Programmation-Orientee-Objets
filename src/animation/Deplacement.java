@@ -9,21 +9,19 @@ import objects.Direction;
  *  La variable direction est du type enumere Direction
 	*/
 public class Deplacement extends Evenement {
-	private Robot robot;
 	private Direction direction;
 
 	public Deplacement(long date, Robot robot, Direction direction) {
-		super(date);
-		this.robot = robot;
+		super(date, robot);
 		this.direction = direction;
 	}
 
 	@Override
 	public void execute() {
 		Case nouvellePosition;
-		int lig = this.robot.getPosition().getLigne();
-		int col = this.robot.getPosition().getColonne();
-		Carte map = this.robot.getCarte();
+		int lig = this.getRobot().getPosition().getLigne();
+		int col = this.getRobot().getPosition().getColonne();
+		Carte map = this.getRobot().getCarte();
 		switch (this.direction) {
 		case NORD:
 			nouvellePosition = map.getCase(lig - 1, col);
@@ -40,6 +38,6 @@ public class Deplacement extends Evenement {
 		default:
 			throw new IllegalArgumentException("Direction de déplacement non valide");
 		}
-		this.robot.setPosition(nouvellePosition);
+		this.getRobot().setPosition(nouvellePosition);
 	}
 }

@@ -39,6 +39,15 @@ public class Case {
 	public String toString(){
 		return ("Case " + this.ligne + " " + this.colonne + " de nature " + this.nature);
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		if (!(o instanceof Case)) {
+			return false;
+		}
+		Case emplacement = (Case) o;
+		return emplacement.getLigne() == this.getLigne() && emplacement.getColonne() == this.getColonne();
+	}
 }
 
 

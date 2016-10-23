@@ -137,10 +137,12 @@ public class Simulateur implements Simulable {
 		Case position;
 
 		for (int i = 0; i < incendies.size(); i++) {
-			position = incendies.get(i).getPosition();
-			gui.addGraphicalElement(new Oval((int) ((position.getColonne()+0.5)*lenCase),
-					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase/2));
-
+			// On ne dessine l'incendie que si ce dernier n'est pas d'intensité nulle
+			if (incendies.get(i).getLitresEau() > 0) {
+				position = incendies.get(i).getPosition();
+				gui.addGraphicalElement(new Oval((int) ((position.getColonne() + 0.5) * lenCase),
+						(int) ((position.getLigne() + 0.5) * lenCase), couleur, couleur, lenCase / 2));
+			}
 		}
 	}
 }
