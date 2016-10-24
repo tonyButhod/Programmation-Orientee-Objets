@@ -6,13 +6,14 @@ public abstract class Robot {
         private Case position;
         protected double vitesse; //Necessaire pour changer valeur par défault
         protected double vitDever;  //vitesses en litres pas seconde
-    	protected long tempsRemp;
+    	protected long tempsRemp;  
         private Carte carte;
         long dateOccupe;
         
-        public Robot (Case position, Carte carte){
+        public Robot (Case position, Carte carte, long tempsRemp){
         	this.position = position;
         	this.carte = carte;
+        	this.tempsRemp = tempsRemp;
         	setDateOccupe(-1); //le robot est libre des le début de la simalation
         }
 
@@ -54,6 +55,7 @@ public abstract class Robot {
         //Rajouter des nouvelles méthodes si nécessaires
         public String toString(){
         	return ("sur la " + this.position + " \n vitesse: " 
-        + vitesse + " \n vitesse d'extinction : " + vitDever);
+        + vitesse + " \n vitesse d'extinction : " + vitDever
+        + "\n occupé jusqu'à la date :" + dateOccupe);
         }
 }
