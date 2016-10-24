@@ -87,7 +87,7 @@ TestRobot: objects src/TestRobot.java
 #   > java -classpath bin:bin/gui.jar TestInvader
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
-exeInvader: testInvader testLecture
+exeInvader: TestInvader TestLecture
 	java -classpath bin:bin/gui.jar TestInvader
 
 exeLecture: 
