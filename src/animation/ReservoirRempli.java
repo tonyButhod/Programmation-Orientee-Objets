@@ -12,5 +12,6 @@ public class ReservoirRempli extends Evenement {
 	@Override
 	public void execute() {
 		this.robot.setVolEau(this.robot.getVolEauMax());
+		System.out.println(this.robot);
 	}
 }

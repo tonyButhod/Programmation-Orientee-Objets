@@ -4,10 +4,9 @@ public class Patte extends Robot {
 
 	public Patte(Case position, Carte carte) {
 
-		super(position, carte);
+		super(position, carte,0);
 		this.vitesse = 30;
 		this.vitDever = 10.0;
-		this.tempsRemp =0;
 	}
 
 	public double getVitesse(NatureTerrain NT) {

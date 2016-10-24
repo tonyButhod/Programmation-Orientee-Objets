@@ -4,7 +4,7 @@ public class Roue extends RobotEau {
 
 	public Roue(Case position, Carte carte, double vitesse) {
 
-		super(position, carte, 5000);
+		super(position, carte, 5000, 10*60);
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");
@@ -13,7 +13,6 @@ public class Roue extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 20.0;
-		this.tempsRemp = 10*60; //+1 pour être juste après le fin du remplissage
 	}
 
 	public double getVitesse(NatureTerrain NT) {

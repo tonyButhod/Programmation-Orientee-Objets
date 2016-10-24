@@ -4,7 +4,7 @@ public class Drone extends RobotEau {
 	
 	public Drone(Case position, Carte carte, double vitesse) {
 		
-		super(position, carte, 10000);
+		super(position, carte, 10000, 30*60);
 		
 		if (vitesse > 150 || vitesse <0){
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
@@ -14,7 +14,6 @@ public class Drone extends RobotEau {
 		}
 		this.vitDever = (double) 1/3 *1000;
 
-		this.tempsRemp = 30*60; //+1 pour être juste après le fin du remplissage
 	}
 
 	public double getVitesse(NatureTerrain NT) {

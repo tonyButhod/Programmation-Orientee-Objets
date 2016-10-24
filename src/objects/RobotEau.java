@@ -5,9 +5,9 @@ public abstract class RobotEau extends Robot {
 	protected double volEau;
 	protected double volEauMax;
 
-	public RobotEau(Case position, Carte carte, int volEauMax) {
+	public RobotEau(Case position, Carte carte, int volEauMax, long tempsRemp) {
 
-		super(position, carte);
+		super(position, carte, tempsRemp);
 		setVolEau(0); // Par défault une robot est vide.
 		this.volEauMax = volEauMax; // pas besoin de constructeur, non
 									// modifiable.
@@ -63,11 +63,14 @@ public abstract class RobotEau extends Robot {
 		int colonne = this.getPosition().getColonne();
 		for (int i = ligne - 1; i <= ligne + 1; i++) {
 			for (int j = colonne - 1; j <= colonne + 1; j++) {
+				System.out.println("ok");
 				if (this.getCarte().getCase(i, j).getNature() == NatureTerrain.EAU) {
+					System.out.println("vrai");
 					return true;
 				}
 			}
 		}
+		System.out.println("faux");
 		return false;
 	}
 

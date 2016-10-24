@@ -4,7 +4,7 @@ public class Chenille extends RobotEau {
 
 	public Chenille(Case position, Carte carte, double vitesse) {
 		
-		super(position, carte, 2000);
+		super(position, carte, 2000, 5*60);
 		
 		if (vitesse > 80 || vitesse < 0) {
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
@@ -13,7 +13,6 @@ public class Chenille extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 12.5;
-		this.tempsRemp = 5*60; 
 	}
 
 	public double getVitesse(NatureTerrain NT) {
