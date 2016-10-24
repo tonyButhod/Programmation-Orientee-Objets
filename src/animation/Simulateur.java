@@ -16,7 +16,8 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donnees;
 	private int lenCase;
 	long dateSimulation;
-	LinkedList<Evenement> evenements;
+	public LinkedList<Evenement> evenements;
+	public LinkedList<Evenement> evenementsAAjouter;
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
@@ -25,23 +26,20 @@ public class Simulateur implements Simulable {
 		this.lenCase = 15;
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
+		this.evenementsAAjouter = new LinkedList<Evenement>();
 
 		draw();
 	}
 
-	public void ajouteEvenement(Evenement e) {
-		if (e.getRobot().getDateOccupe() < this.dateSimulation) {
-			ListIterator<Evenement> le = evenements.listIterator();
-			while (le.hasNext()) {
-				if (le.next().getDate() > e.getDate()) {
-					le.previous();
-					break;
-				}
+	public void ajouteEvenement(Evenement e, LinkedList<Evenement> list) {
+		ListIterator<Evenement> le = list.listIterator();
+		while (le.hasNext()) {
+			if (le.next().getDate() > e.getDate()) {
+				le.previous();
+				break;
 			}
-			le.add(e);
-		} else {
-			System.out.println("robot occupé ! Evenement non ajouté");
 		}
+		le.add(e);
 	}
 
 	public void incrementeDate() {
@@ -74,6 +72,13 @@ public class Simulateur implements Simulable {
 			e = le.hasNext() ? le.next() : null;
 			evenements.remove();
 		}
+		if (evenementsAAjouter != null) {
+			for (Evenement evt : evenementsAAjouter) {
+				ajouteEvenement(evt, evenements);
+				evenementsAAjouter.remove();
+			}
+		}
+		verifIncendies();
 		incrementeDate();
 		draw();
 	}
@@ -142,6 +147,15 @@ public class Simulateur implements Simulable {
 				position = incendies.get(i).getPosition();
 				gui.addGraphicalElement(new Oval((int) ((position.getColonne() + 0.5) * lenCase),
 						(int) ((position.getLigne() + 0.5) * lenCase), couleur, couleur, lenCase / 2));
+			}
+		}
+	}
+	
+	private void verifIncendies() {
+		List<Incendie> incendies = donnees.getIncendies();
+		for (int i = 0; i < incendies.size(); i++) {
+			if (incendies.get(i).getLitresEau() == 0.0) {
+				incendies.remove(i);
 			}
 		}
 	}

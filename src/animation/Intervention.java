@@ -23,10 +23,10 @@ public class Intervention extends Evenement {
 		}
 		if (! this.getRobot().deverserEau(this.incendie)) {
 			Evenement prochainDever = new Intervention(this.getDate()+1, this.getRobot(), this.incendie, this.simu);
-			simu.ajouteEvenement(prochainDever);
-			this.getRobot().setDateOccupe(this.getDate()+1);
+			simu.ajouteEvenement(prochainDever, simu.evenementsAAjouter);
+			//this.getRobot().setDateOccupe(this.getDate()+1);
 		}
-		System.out.println("Date : " + this.getDate() + "Intensite : " + this.incendie.getLitresEau());
+		//System.out.println("Date : " + this.getDate() + "Intensite : " + this.incendie.getLitresEau());
 	}
 
 	private boolean estSurIncendie() {

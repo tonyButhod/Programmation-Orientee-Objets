@@ -18,7 +18,7 @@ public class TestIntervention {
             Simulateur aff = new Simulateur(gui, DS);
             Evenement dN = new Deplacement(10, DS.getRobots().get(1), Direction.NORD);
 
-            aff.ajouteEvenement(dN);
+            aff.ajouteEvenement(dN, aff.evenements);
             
 //            Incendie incendie = null;
 //            for(Incendie incendieCarte:DS.getIncendies()) {
@@ -39,9 +39,10 @@ public class TestIntervention {
 					incendie = incendieCarte;
 				}
 			}
+			System.out.println("Le robot " + DS.getRobots().get(1).toString() + " va intervenir sur l'incendie " + incendie.toString());
             
             Evenement interFeu = new Intervention(40, DS.getRobots().get(1), incendie, aff);
-            aff.ajouteEvenement(interFeu);
+            aff.ajouteEvenement(interFeu, aff.evenements);
         } 
         catch (FileNotFoundException e) {
             System.out.println(e);
