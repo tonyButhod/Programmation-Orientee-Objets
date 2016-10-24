@@ -8,9 +8,9 @@ public abstract class RobotEau extends Robot {
 	public RobotEau(Case position, Carte carte, int volEauMax) {
 
 		super(position, carte);
-		setVolEau(0); // Par défault une robot est vide.
 		this.volEauMax = volEauMax; // pas besoin de constructeur, non
-									// modifiable.
+		// modifiable.
+		setVolEau(volEauMax); // Par défault une robot est vide.
 
 	}
 
@@ -53,6 +53,7 @@ public abstract class RobotEau extends Robot {
 		else {
 			this.volEau -= java.lang.Math.min(this.getVitDever(), this.getVolEau());
 			incendie.setLitresEau(intensiteApresDever);
+			//System.out.println("J'ai déversé " + java.lang.Math.min(this.getVitDever(), this.getVolEau()) + " litres d'eau");
 			return false;
 		}
 	}
