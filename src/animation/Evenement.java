@@ -1,5 +1,6 @@
 package animation;
 import objects.Robot;
+import exception.*;
 
 
 public abstract class Evenement {
@@ -21,5 +22,5 @@ public abstract class Evenement {
     	this.robot = robot;
     }
 
-    public abstract void execute();
+	public abstract void execute() throws ExecutionEvenementException;
 }
