@@ -14,16 +14,16 @@ public class TestSimulateur {
             GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
             DonneesSimulation DS = LecteurDonnees.lire("cartes/carteSujet.map");
             Simulateur simu = new Simulateur(gui, DS);
-            Evenement e1 = new Intervention(4, null);
-            Evenement e2 = new Intervention(2, null);
-            Evenement e3 = new Intervention(3, null);
-            Evenement e4 = new Intervention(5, null);
-            Evenement e5 = new Intervention(1, null);
-            simu.ajouteEvenement(e1, simu);
-            simu.ajouteEvenement(e5, simu);
-            simu.ajouteEvenement(e2, simu);
-            simu.ajouteEvenement(e3, simu);
-            simu.ajouteEvenement(e4, simu);
+            Evenement e1 = new Intervention(4, null, null, simu);
+            Evenement e2 = new Intervention(2, null, null, simu);
+            Evenement e3 = new Intervention(3, null, null, simu);
+            Evenement e4 = new Intervention(5, null, null, simu);
+            Evenement e5 = new Intervention(1, null, null, simu);
+            simu.ajouteEvenement(e1, simu.evenements);
+            simu.ajouteEvenement(e5, simu.evenements);
+            simu.ajouteEvenement(e2, simu.evenements);
+            simu.ajouteEvenement(e3, simu.evenements);
+            simu.ajouteEvenement(e4, simu.evenements);
             System.out.println(simu);
         }
         catch (FileNotFoundException e) {

@@ -24,19 +24,26 @@ public class Deplacement extends Evenement {
 		Carte map = this.getRobot().getCarte();
 		switch (this.direction) {
 		case NORD:
-			nouvellePosition = map.getCase(lig - 1, col);
+			lig -= 1;
 			break;
 		case SUD:
-			nouvellePosition = map.getCase(lig + 1, col);
+			lig += 1;
 			break;
 		case EST:
-			nouvellePosition = map.getCase(lig, col + 1);
+			col += 1;
 			break;
 		case OUEST:
-			nouvellePosition = map.getCase(lig, col - 1);
+			col -= 1;
 			break;
 		default:
 			throw new IllegalArgumentException("Direction de déplacement non valide");
+		}
+		if (lig < 0 || lig > map.getNbLignes() - 1 || col < 0 || col > map.getNbColonnes() - 1) {
+			throw new IllegalArgumentException("Deplacement impossible du robot sur cette case (Hors de la carte)");
+		}
+		nouvellePosition = map.getCase(lig, col);
+		if (this.getRobot().getVitesse(nouvellePosition.getNature()) < 0) {
+			throw new IllegalArgumentException("Deplacement impossible du robot sur cette case (Terrain non compatible)");
 		}
 		this.getRobot().setPosition(nouvellePosition);
 	}
