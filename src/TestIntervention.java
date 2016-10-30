@@ -16,32 +16,34 @@ public class TestIntervention {
             Carte map = DS.getCarte();
             
             Simulateur aff = new Simulateur(gui, DS);
-            Evenement dN = new Deplacement(10, DS.getRobots().get(1), Direction.NORD);
+            
+            //Le robot utilisé est un robot à roue, qui peut se remplir car étant un RobotEau
+            RobotEau robot = (RobotEau) DS.getRobots().get(1);
+            
+            Evenement dN = new Deplacement(10, robot, Direction.NORD);
 
             aff.ajouteEvenement(dN, aff.evenements);
             
-//            Incendie incendie = null;
-//            for(Incendie incendieCarte:DS.getIncendies()) {
-//            	if (DS.getRobots().get(1).getPosition().equals(incendieCarte.getPosition())) {
-//            		incendie = incendieCarte;
-//            	}
-//            }
-//            
-//            if (incendie == null) {
-//            	throw new IllegalArgumentException("Aucun incendie sous le robot");
-			// }
+            //On remplit le robot artificiellement, pour tester seulement l'extinction du feu
+            robot.setVolEau(robot.getVolEauMax());
+            
 			Case feu = null;
 			Incendie incendie = null;
-			feu = map.getCase(DS.getRobots().get(1).getPosition().getLigne() - 1,
-					DS.getRobots().get(1).getPosition().getColonne());
+			feu = map.getCase(robot.getPosition().getLigne() - 1,
+					robot.getPosition().getColonne());
 			for (Incendie incendieCarte : DS.getIncendies()) {
 				if (feu.equals(incendieCarte.getPosition())) {
 					incendie = incendieCarte;
 				}
 			}
-			System.out.println("Le robot " + DS.getRobots().get(1).toString() + " va intervenir sur l'incendie " + incendie.toString());
+			
+            //Pour les besoins du test on réduit aussi l'intensité de l'incendie
+            //Afin de pouvoir l'éteindre avce juste le robot à roue
+			incendie.setLitresEau(1000.0);
+			
+			System.out.println("Le robot " + robot.toString() + " va intervenir sur l'incendie " + incendie.toString());
             
-            Evenement interFeu = new Intervention(40, DS.getRobots().get(1), incendie, aff);
+            Evenement interFeu = new Intervention(40, robot, incendie, aff);
             aff.ajouteEvenement(interFeu, aff.evenements);
         } 
         catch (FileNotFoundException e) {

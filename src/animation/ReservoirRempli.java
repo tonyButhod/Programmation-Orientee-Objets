@@ -13,6 +13,5 @@ public class ReservoirRempli extends Evenement {
 		RobotEau robot1 = (RobotEau) this.getRobot();
 		robot1.setVolEau(robot1.getVolEauMax());
 		System.out.println(robot1);
-		System.out.println("remplissage");
 	}
 }

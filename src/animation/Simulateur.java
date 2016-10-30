@@ -10,6 +10,8 @@ import gui.Simulable;
 
 import objects.*;
 
+import exception.*;
+
 public class Simulateur implements Simulable {
 	/** L'interface graphique associée */
 	private GUISimulator gui;
@@ -65,27 +67,33 @@ public class Simulateur implements Simulable {
 
 	@Override
 	public void next() {
-		if (simulationTerminee()) {
-			return;
-		}
-		ListIterator<Evenement> le = evenements.listIterator();
-		Evenement e = le.hasNext() ? le.next() : null;
-		while (e != null && e.getDate() <= dateSimulation) {
-			if (dateSimulation >= e.getRobot().getDateOccupe()) {
-				e.execute();
+
+		try {
+			if (simulationTerminee()) {
+				return;
 			}
+			ListIterator<Evenement> le = evenements.listIterator();
+			Evenement e = le.hasNext() ? le.next() : null;
+			while (e != null && e.getDate() <= dateSimulation) {
+				if (dateSimulation >= e.getRobot().getDateOccupe()) {
+					e.execute();
+				}
 				e = le.hasNext() ? le.next() : null;
+				evenements.remove();
+			}
+			if (evenementsAAjouter != null) {
+				for (Evenement evt : evenementsAAjouter) {
+					ajouteEvenement(evt, evenements);
+					evenementsAAjouter.remove();
+				}
+			}
+			verifIncendies();
+			incrementeDate();
+			draw();
+		} catch (ExecutionEvenementException e) {
+			System.out.println(e);
 			evenements.remove();
 		}
-		if (evenementsAAjouter != null) {
-			for (Evenement evt : evenementsAAjouter) {
-				ajouteEvenement(evt, evenements);
-				evenementsAAjouter.remove();
-			}
-		}
-		verifIncendies();
-		incrementeDate();
-		draw();
 	}
 
 	private void draw() {

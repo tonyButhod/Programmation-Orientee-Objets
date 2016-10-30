@@ -25,6 +25,7 @@ OBJ:=$(wildcard src/objects/*.java)
 IO:=$(wildcard src/io/*.java)
 ANIM:=$(wildcard src/animation/*.java)
 STRAT:=$(wildcard src/strategie/*.java)
+EXCEPT:=$(wildcard src/exception/*.java)
 
 all: testInvader testLecture 
 
@@ -44,13 +45,13 @@ TestCarte: io objects animation src/TestCarte.java
 TestSimu: objects animation src/TestSimulateur.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestSimulateur.java
 
-TestDeplacement: io objects animation src/TestDeplacement.java
+TestDeplacement: io objects animation exception src/TestDeplacement.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDeplacement.java
 
-TestRemplissage: io objects animation src/TestRemplissage.java
+TestRemplissage: io objects animation exception src/TestRemplissage.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestRemplissage.java
 
-TestIntervention: io objects animation src/TestIntervention.java
+TestIntervention: io objects animation exception src/TestIntervention.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestIntervention.java
 
 TestStrat: objects animation src/TestStrategie.java
@@ -58,20 +59,6 @@ TestStrat: objects animation src/TestStrategie.java
 
 TestDijkstra: objects animation strategie src/TestDijkstra.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestDijkstra.java
-
-
-
-io: $(IO)
-	javac -d bin -sourcepath src $^
-
-objects: $(OBJ)
-	javac -d bin -sourcepath src $^
-
-animation: $(ANIM)
-	javac -d bin -classpath bin/gui.jar -sourcepath src $^
-
-strategie: $(STRAT)
-	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 TestIncendie: objects src/TestIncendie.java
 	javac -d bin -sourcepath src src/TestIncendie.java
@@ -82,12 +69,30 @@ TestDonnees: objects src/TestDonnees.java
 TestRobot: objects src/TestRobot.java
 	javac -d bin -sourcepath src src/TestRobot.java
 
+
+io: $(IO)
+	javac -d bin -sourcepath src $^
+
+objects: $(OBJ)
+	javac -d bin -sourcepath src $^
+
+exception: $(EXCEPT)
+	javac -d bin -sourcepath src $^
+
+animation: $(ANIM)
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
+
+strategie: $(STRAT)
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
+
+
+
 # Execution:
 # on peut taper directement la ligne de commande :
 #   > java -classpath bin:bin/gui.jar TestInvader
 # ou bien lancer l'execution en passant par ce Makefile:
 #   > make exeInvader
-exeInvader: testInvader testLecture
+exeInvader: TestInvader TestLecture
 	java -classpath bin:bin/gui.jar TestInvader
 
 exeLecture: 
@@ -127,4 +132,4 @@ exeTestRobot:
 	java -classpath bin TestRobot
 
 clean:
-	rm -rf bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~
+	rm -rf bin/src/ bin/exception/ bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~

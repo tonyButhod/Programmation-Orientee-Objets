@@ -30,13 +30,21 @@ public class TestRemplissage {
 			Evenement remp = new RemplirReservoir(35, DS.getRobots().get(1), aff);
 			aff.ajouteEvenement(remp, aff.evenements);
 		
+			Evenement remperr = new RemplirReservoir(15, DS.getRobots().get(1), aff);
+			aff.ajouteEvenement(remperr, aff.evenements);
+		
 			
 			Evenement dE1 = new Deplacement(35 + temps +1, DS.getRobots().get(1), Direction.EST);
 			aff.ajouteEvenement(dE1, aff.evenements);
 	
-
-			Evenement dE2 = new Deplacement(40, DS.getRobots().get(1), Direction.SUD);
+			Evenement dE2 = new Deplacement(35 + temps +2, DS.getRobots().get(1), Direction.OUEST);
 			aff.ajouteEvenement(dE2, aff.evenements);
+			
+			Evenement dE3 = new Deplacement(35 + temps +3, DS.getRobots().get(1), Direction.SUD);
+			aff.ajouteEvenement(dE3, aff.evenements);
+
+			Evenement dE4 = new Deplacement(40, DS.getRobots().get(1), Direction.NORD);
+			aff.ajouteEvenement(dE4, aff.evenements);
 
 	
 		} catch (FileNotFoundException e) {

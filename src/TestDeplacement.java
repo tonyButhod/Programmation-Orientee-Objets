@@ -22,13 +22,21 @@ public class TestDeplacement {
             Evenement dO2 = new Deplacement(30, DS.getRobots().get(1), Direction.OUEST);
             Evenement dE1 = new Deplacement(40, DS.getRobots().get(1), Direction.EST);
             Evenement dE2 = new Deplacement(50, DS.getRobots().get(1), Direction.EST);
+            Evenement dE3 = new Deplacement(60, DS.getRobots().get(1), Direction.EST);
+            Evenement dE4 = new Deplacement(70, DS.getRobots().get(1), Direction.EST);
+            Evenement dE5 = new Deplacement(80, DS.getRobots().get(1), Direction.EST);
+            Evenement dS = new Deplacement(90, DS.getRobots().get(1), Direction.SUD);
 
-            aff.ajouteEvenement(dO2);
+            aff.ajouteEvenement(dO2, aff.evenements);
             
-            aff.ajouteEvenement(dN);
-            aff.ajouteEvenement(dO1);
-            aff.ajouteEvenement(dE1);
-            aff.ajouteEvenement(dE2);
+            aff.ajouteEvenement(dN, aff.evenements);
+            aff.ajouteEvenement(dO1, aff.evenements);
+            aff.ajouteEvenement(dE1, aff.evenements);
+            aff.ajouteEvenement(dE2, aff.evenements);
+            aff.ajouteEvenement(dE3, aff.evenements);
+            aff.ajouteEvenement(dE4, aff.evenements);
+            aff.ajouteEvenement(dE5, aff.evenements);
+            aff.ajouteEvenement(dS, aff.evenements);
         } 
         catch (FileNotFoundException e) {
             System.out.println(e);
