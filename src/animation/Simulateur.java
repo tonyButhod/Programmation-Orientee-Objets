@@ -15,7 +15,7 @@ public class Simulateur implements Simulable {
 	private GUISimulator gui;
 	private DonneesSimulation donnees;
 	private int lenCase;
-	long dateSimulation;
+	private long dateSimulation;
 	public LinkedList<Evenement> evenements;
 	public LinkedList<Evenement> evenementsAAjouter;
 
@@ -29,6 +29,9 @@ public class Simulateur implements Simulable {
 		this.evenementsAAjouter = new LinkedList<Evenement>();
 
 		draw();
+	}
+	public long getDateSimu(){
+		return this.dateSimulation;
 	}
 
 	public void ajouteEvenement(Evenement e, LinkedList<Evenement> list) {
@@ -68,8 +71,10 @@ public class Simulateur implements Simulable {
 		ListIterator<Evenement> le = evenements.listIterator();
 		Evenement e = le.hasNext() ? le.next() : null;
 		while (e != null && e.getDate() <= dateSimulation) {
-			e.execute();
-			e = le.hasNext() ? le.next() : null;
+			if (dateSimulation >= e.getRobot().getDateOccupe()) {
+				e.execute();
+			}
+				e = le.hasNext() ? le.next() : null;
 			evenements.remove();
 		}
 		if (evenementsAAjouter != null) {

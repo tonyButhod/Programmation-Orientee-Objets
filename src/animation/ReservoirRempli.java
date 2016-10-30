@@ -3,7 +3,6 @@ package animation;
 import objects.*;
 
 public class ReservoirRempli extends Evenement {
-	private RobotEau robot;
 
 	public ReservoirRempli(long date, Robot robot) {
 		super(date, robot);
@@ -11,7 +10,9 @@ public class ReservoirRempli extends Evenement {
 
 	@Override
 	public void execute() {
-		this.robot.setVolEau(this.robot.getVolEauMax());
-		System.out.println(this.robot);
+		RobotEau robot1 = (RobotEau) this.getRobot();
+		robot1.setVolEau(robot1.getVolEauMax());
+		System.out.println(robot1);
+		System.out.println("remplissage");
 	}
 }

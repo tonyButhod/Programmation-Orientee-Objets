@@ -4,7 +4,7 @@ public class Roue extends RobotEau {
 
 	public Roue(Case position, Carte carte, double vitesse) {
 
-		super(position, carte, 5000, 10*60);
+		super(position, carte, 5000, 10); //10*60
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");
