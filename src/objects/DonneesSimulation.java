@@ -45,6 +45,10 @@ public class DonneesSimulation {
     		incendiesBase.set(i, feu.copierIncendie());
     	}
     	List <Robot> robotsBase = new ArrayList<Robot> (this.robots);
+    	//TO DO : copie de chaque Robot de la liste
+//    	for(int i = 0; i < robots.size(); i++){
+//    		//Copie Robot
+//    	}
     	DonneesSimulation donneesCopiees = new DonneesSimulation(this.carte, incendiesBase, robotsBase);
     	return donneesCopiees;
     }
