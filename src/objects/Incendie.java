@@ -37,5 +37,10 @@ public class Incendie {
     public String toString() {
         return new String("Feu à la case " + this.position.toString() + ", necessite " + this.getLitresEau() + "L d'eau");
     }
+    
+    public Incendie copierIncendie(){
+    	Incendie incendie = new Incendie(this.position, this.getLitresEau());
+    	return incendie;
+    }
         
 }

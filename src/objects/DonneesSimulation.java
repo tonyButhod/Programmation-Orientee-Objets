@@ -38,4 +38,14 @@ public class DonneesSimulation {
         this.robots = robots;
     }
 
+    public DonneesSimulation copierDonnees() {
+    	List <Incendie> incendiesBase = new ArrayList<Incendie> (this.incendies);
+    	for(int i = 0; i < incendies.size(); i++){
+    		Incendie feu = incendies.get(i);
+    		incendiesBase.set(i, feu.copierIncendie());
+    	}
+    	List <Robot> robotsBase = new ArrayList<Robot> (this.robots);
+    	DonneesSimulation donneesCopiees = new DonneesSimulation(this.carte, incendiesBase, robotsBase);
+    	return donneesCopiees;
+    }
 }
