@@ -18,7 +18,7 @@ public class TestIntervention {
             Simulateur aff = new Simulateur(gui, DS);
             
             //Le robot utilisé est un robot à roue, qui peut se remplir car étant un RobotEau
-            RobotEau robot = (RobotEau) DS.getRobots().get(1);
+            objects.Robot robot = DS.getRobots().get(1);
             
             Evenement dN = new Deplacement(10, robot, Direction.NORD);
 

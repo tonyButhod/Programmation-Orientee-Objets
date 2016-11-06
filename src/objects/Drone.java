@@ -1,25 +1,26 @@
 package objects;
 
-public class Drone extends RobotEau {
+public class Drone extends Robot {
 	
 	public Drone(Case position, Carte carte, double vitesse) {
 		
-		super(position, carte, 10000, 30*60);
+		super(position, carte, 30*60);
 		
 		if (vitesse > 150 || vitesse <0){
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
-			this.vitesse = 100;
+			super.vitesse = 100;
 		}else{
-			this.vitesse= vitesse;
+			super.vitesse= vitesse;
 		}
-		this.vitDever = (double) 1/3 *1000;
-
+		super.vitDever = (double) 1/3 *1000;
+		super.volEauMax = 10000;
 	}
 
 	public double getVitesse(NatureTerrain NT) {
 			return super.vitesse;
 	}
 
+	@Override
 	public boolean peutSeRemplir(){
 		return (this.getPosition().getNature() == NatureTerrain.EAU);
 	}
