@@ -69,6 +69,8 @@ TestDonnees: objects src/TestDonnees.java
 TestRobot: objects src/TestRobot.java
 	javac -d bin -sourcepath src src/TestRobot.java
 
+TestChefRobot: objects src/TestChefRobot.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestChefRobot.java
 
 io: $(IO)
 	javac -d bin -sourcepath src $^
@@ -131,5 +133,7 @@ exeTestDonnees: TestDonnes
 exeTestRobot: TestRobot
 	java -classpath bin TestRobot
 
+exeTestChefRobot: TestChefRobot
+	java -classpath bin:bin/gui.jar TestChefRobot
 clean:
 	rm -rf bin/src/ bin/exception/ bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~
