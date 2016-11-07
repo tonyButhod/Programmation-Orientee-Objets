@@ -9,8 +9,10 @@ public abstract class Robot {
     	protected long tempsRemp;  
         private Carte carte;
         long dateOccupe;
+        protected String image = "images/"; //Pour le dessin des robots
         
-        public Robot (Case position, Carte carte, long tempsRemp){
+ 
+		public Robot (Case position, Carte carte, long tempsRemp){
         	this.position = position;
         	this.carte = carte;
         	this.tempsRemp = tempsRemp;
@@ -45,6 +47,11 @@ public abstract class Robot {
     	public void setDateOccupe(long date){
     		this.dateOccupe = date;
     	}
+    	
+        public String getImage() {
+ 			return image;
+ 		}
+
 
         public abstract boolean peutSeRemplir();
         

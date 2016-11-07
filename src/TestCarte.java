@@ -14,7 +14,7 @@ public class TestCarte {
     public static void main(String[] args) {
         try {
             GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-            DonneesSimulation DS = LecteurDonnees.lire("cartes/desertOfDeath-20x20.map");
+            DonneesSimulation DS = LecteurDonnees.lire("cartes/carteSujet.map");
             Carte map = DS.getCarte();
             System.out.println("Map : "+map.getNbLignes()+"x"+map.getNbColonnes()+", tailleCases : "+map.getTailleCases());
             System.out.println(map.getCase(7,3));

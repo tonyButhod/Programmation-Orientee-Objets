@@ -7,6 +7,7 @@ public class Patte extends Robot {
 		super(position, carte,0);
 		this.vitesse = 30;
 		this.vitDever = 10.0;
+		this.image += "pattes.png";
 	}
 
 	public double getVitesse(NatureTerrain NT) {

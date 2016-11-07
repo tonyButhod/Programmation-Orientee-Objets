@@ -13,7 +13,7 @@ public class Drone extends RobotEau {
 			this.vitesse= vitesse;
 		}
 		this.vitDever = (double) 1/3 *1000;
-
+		this.image += "drone.png";
 	}
 
 	public double getVitesse(NatureTerrain NT) {

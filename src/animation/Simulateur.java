@@ -1,13 +1,18 @@
 package animation;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 
 import gui.GUISimulator;
 import gui.Rectangle;
 import gui.Oval;
+import gui.ImageElement;
 import gui.Simulable;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
 import objects.*;
 
 import exception.*;
@@ -16,7 +21,8 @@ public class Simulateur implements Simulable {
 	/** L'interface graphique associée */
 	private GUISimulator gui;
 	private DonneesSimulation donnees;
-	private int lenCase;
+	private int lenCaseHeight;
+	private int lenCaseWidth;
 	private long dateSimulation;
 	public LinkedList<Evenement> evenements;
 	public LinkedList<Evenement> evenementsAAjouter;
@@ -25,7 +31,8 @@ public class Simulateur implements Simulable {
 		this.gui = gui;
 		gui.setSimulable(this); // association a la gui!
 		this.donnees = donnees;
-		this.lenCase = 15;
+		this.lenCaseHeight = (gui.getPanelHeight()-50)/donnees.getCarte().getNbLignes(); //On adapte la tille des cases à la fenêtre
+		this.lenCaseWidth = (gui.getPanelWidth()-50)/donnees.getCarte().getNbColonnes();
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
 		this.evenementsAAjouter = new LinkedList<Evenement>();
@@ -103,18 +110,20 @@ public class Simulateur implements Simulable {
 			for (int j = 0; j < carte.getNbColonnes(); j++) {
 				NatureTerrain nature = carte.getCase(i, j).getNature();
 				Color couleur = Color.BLACK;
+				String image="images/";
 				if (nature == NatureTerrain.EAU) {
-					couleur = Color.decode("#0000ef");
+					image += "eau.jpg";
 				} else if (nature == NatureTerrain.ROCHE) {
-					couleur = Color.decode("#934d00");
+					image += "roche.png";
 				} else if (nature == NatureTerrain.FORET) {
-					couleur = Color.decode("#006b00");
+					image += "foret.png";
 				} else if (nature == NatureTerrain.TERRAIN_LIBRE) {
-					couleur = Color.WHITE;
+					image += "herbe.png";
 				} else if (nature == NatureTerrain.HABITAT) {
-					couleur = Color.GRAY;
+					image += "maison.png";
 				}
-				gui.addGraphicalElement(new Rectangle((int) ((j+0.5)*lenCase), (int) ((i+0.5)*lenCase), couleur, couleur, lenCase));
+				gui.addGraphicalElement(new ImageElement((int) ((j+0.5)*lenCaseWidth),
+						(int) ((i+0.5)*lenCaseHeight),image,lenCaseWidth, lenCaseHeight ,null));
 			}
 		}
 		drawIncendies();
@@ -139,12 +148,10 @@ public class Simulateur implements Simulable {
 		//ImageObserver io = null;
 
 		for (int i = 0; i < robots.size(); i++) {
-			position = robots.get(i).getPosition();
-			// gui.addGraphicalElement(new ImageElement(position.getLigne() *
-			// lenCase, position.getColonne() * lenCase,"robot.png", lenCase,
-			// lenCase, io));
-			gui.addGraphicalElement(new Oval((int) ((position.getColonne()+0.5)*lenCase),
-					(int) ((position.getLigne()+0.5)*lenCase), couleur, couleur, lenCase / 3));
+			position = robots.get(i).getPosition();		
+			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne()+0.5) * lenCaseWidth), 
+					(int) (( position.getLigne()+0.5) * lenCaseHeight),robots.get(i).getImage(), lenCaseWidth, 
+					lenCaseHeight, null));
 		}
 	}
 
@@ -158,8 +165,9 @@ public class Simulateur implements Simulable {
 			// On ne dessine l'incendie que si ce dernier n'est pas d'intensité nulle
 			if (incendies.get(i).getLitresEau() > 0) {
 				position = incendies.get(i).getPosition();
-				gui.addGraphicalElement(new Oval((int) ((position.getColonne() + 0.5) * lenCase),
-						(int) ((position.getLigne() + 0.5) * lenCase), couleur, couleur, lenCase / 2));
+				gui.addGraphicalElement(new ImageElement((int) ((position.getColonne()+0.5) * lenCaseWidth), 
+						(int) (( position.getLigne()+0.5) * lenCaseHeight),"images/incendie.png", lenCaseWidth, 
+						lenCaseHeight, null));
 			}
 		}
 	}

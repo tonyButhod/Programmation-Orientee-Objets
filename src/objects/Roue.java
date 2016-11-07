@@ -13,6 +13,7 @@ public class Roue extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 20.0;
+		this.image += "roue.png";
 	}
 
 	public double getVitesse(NatureTerrain NT) {

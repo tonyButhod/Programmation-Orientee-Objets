@@ -13,6 +13,7 @@ public class Chenille extends RobotEau {
 			this.vitesse = vitesse;
 		}
 		this.vitDever = 12.5;
+		this.image += "chenille.png";
 	}
 
 	public double getVitesse(NatureTerrain NT) {
