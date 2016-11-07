@@ -26,8 +26,8 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donneesBase;
 
 	private long dateSimulation;
-	public LinkedList<Evenement> evenements;
-	public LinkedList<Evenement> evenementsAAjouter;
+	private LinkedList<Evenement> evenements;
+	private LinkedList<Evenement> evenementsAAjouter;
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
