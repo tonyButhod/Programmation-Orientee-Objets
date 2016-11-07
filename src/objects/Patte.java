@@ -1,15 +1,16 @@
 package objects;
 
 public class Patte extends Robot {
+	
+	public Patte(Patte patte){
+		super(patte);
+	}
 
 	public Patte(Case position, Carte carte) {
-
-		super(position, carte,0);
+		super(position, carte, 0, 10.0, -1, 10.0, "pattes.png");
 		this.vitesse = 30;
-		this.vitDever = 10.0;
-		this.image += "pattes.png";
-		super.volEau = super.vitDever; //Il restera inchangé car il ne se vide pas
-		super.volEauMax = -1; //Permet de reconnaitre un robot à patte
+		//volEau = vitDever, restera inchangé car il ne se vide pas
+		//volEau à -1 pour reconnaitre un robot à patte
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -20,6 +21,11 @@ public class Patte extends Robot {
 			return -1;
 		}
 		return super.vitesse;
+	}
+	
+	public Robot copierRobot(){
+		Patte patte = new Patte(this);
+		return patte;
 	}
 
 	//Par sécurité, mais est normalement inutile

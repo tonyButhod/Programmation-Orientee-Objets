@@ -1,10 +1,13 @@
 package objects;
 
 public class Chenille extends Robot {
+	
+	public Chenille(Chenille chenille){
+		super(chenille);
+	}
 
 	public Chenille(Case position, Carte carte, double vitesse) {
-		
-		super(position, carte, 5*60);
+		super(position, carte, 5*60, 0, 2000, 12.5, "chenille.png");
 		
 		if (vitesse > 80 || vitesse < 0) {
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
@@ -12,9 +15,6 @@ public class Chenille extends Robot {
 		} else {
 			super.vitesse = vitesse;
 		}
-		this.image += "chenille.png";
-		super.vitDever = 12.5;
-		super.volEauMax = 2000;
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -25,6 +25,11 @@ public class Chenille extends Robot {
 			return -1;
 		}
 		return super.vitesse;
+	}
+	
+	public Robot copierRobot(){
+		Chenille chenille = new Chenille(this);
+		return chenille;
 	}
 
 	@Override
