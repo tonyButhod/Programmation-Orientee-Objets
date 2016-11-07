@@ -74,5 +74,4 @@ public abstract class RobotEau extends Robot {
 		System.out.println("faux");
 		return false;
 	}
-
 }

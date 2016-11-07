@@ -23,6 +23,8 @@ public class Simulateur implements Simulable {
 	private DonneesSimulation donnees;
 	private int lenCaseHeight;
 	private int lenCaseWidth;
+	private DonneesSimulation donneesBase;
+
 	private long dateSimulation;
 	public LinkedList<Evenement> evenements;
 	public LinkedList<Evenement> evenementsAAjouter;
@@ -33,6 +35,8 @@ public class Simulateur implements Simulable {
 		this.donnees = donnees;
 		this.lenCaseHeight = (gui.getPanelHeight()-50)/donnees.getCarte().getNbLignes(); //On adapte la tille des cases à la fenêtre
 		this.lenCaseWidth = (gui.getPanelWidth()-50)/donnees.getCarte().getNbColonnes();
+		this.donneesBase = donnees.copierDonnees();
+
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
 		this.evenementsAAjouter = new LinkedList<Evenement>();
@@ -68,7 +72,11 @@ public class Simulateur implements Simulable {
 
 	@Override
 	public void restart() {
-		// Rappeler la fonction qui calcule tous les déplacements initiaux
+		donnees = donneesBase.copierDonnees();
+		evenements.clear();
+		evenementsAAjouter.clear();
+		// Rappeler la fonction qui calcule tous les déplacements initiaux, ie le chef robot
+		
 		draw();
 	}
 
@@ -162,13 +170,14 @@ public class Simulateur implements Simulable {
 		Case position;
 
 		for (int i = 0; i < incendies.size(); i++) {
-			// On ne dessine l'incendie que si ce dernier n'est pas d'intensité nulle
-			if (incendies.get(i).getLitresEau() > 0) {
-				position = incendies.get(i).getPosition();
-				gui.addGraphicalElement(new ImageElement((int) ((position.getColonne()+0.5) * lenCaseWidth), 
-						(int) (( position.getLigne()+0.5) * lenCaseHeight),"images/incendie.png", lenCaseWidth, 
-						lenCaseHeight, null));
-			}
+
+			// L'incendie ne doit pas etre dessinne si son intensite est nulle mais
+			// la fonction verifIncendies est appellée avant draw(), les incendies nuls sont donc
+			// supprimés de la liste
+			position = incendies.get(i).getPosition();
+			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne() + 0.5) * lenCaseWidth),
+					(int) ((position.getLigne() + 0.5) * lenCaseHeight), "images/incendie.png", lenCaseWidth,
+					lenCaseHeight, null));
 		}
 	}
 	

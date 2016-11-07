@@ -2,7 +2,6 @@ package objects;
 
 /**Robot est une classe en partie abstraite*/
 public abstract class Robot {
-        //Attributs Robot à définir
         private Case position;
         protected double vitesse; //Necessaire pour changer valeur par défault
         protected double vitDever;  //vitesses en litres pas seconde
@@ -16,7 +15,7 @@ public abstract class Robot {
         	this.position = position;
         	this.carte = carte;
         	this.tempsRemp = tempsRemp;
-        	setDateOccupe(-1); //le robot est libre des le début de la simalation
+        	setDateOccupe(-1); //le robot est libre dès le début de la simalation
         }
 
         public Case getPosition(){
@@ -58,8 +57,7 @@ public abstract class Robot {
         public abstract boolean deverserEau(Incendie incendie);
         	
         //public abstract void remplirReservoir();
-
-        //Rajouter des nouvelles méthodes si nécessaires
+        
         public String toString(){
         	return ("sur la " + this.position + " \n vitesse: " 
         + vitesse + " \n vitesse d'extinction : " + vitDever

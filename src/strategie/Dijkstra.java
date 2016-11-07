@@ -127,7 +127,7 @@ public class Dijkstra {
             int posCcour = cour.getColonne();
             while (posLcour != posLstart || posCcour != posCstart) {
                 Deplacement e = new Deplacement((long) temps[posLcour][posCcour]+tpsDebut, robot, pred[posLcour][posCcour]);
-                simu.ajouteEvenement(e);
+                simu.ajouteEvenement(e, simu.evenements);
                 Direction dirInv;
                 if (pred[posLcour][posCcour]==Direction.NORD || pred[posLcour][posCcour]==Direction.SUD) {
                     dirInv = pred[posLcour][posCcour]==Direction.NORD?Direction.SUD:Direction.NORD;
@@ -140,6 +140,91 @@ public class Dijkstra {
                 posCcour = cour.getColonne();
             }
             return (long) (temps[endL][endC]);
+        }
+    }
+
+    //Fonction calculant l'itinéraire le plus court pour aller remplir reservoir du robot
+    // Renvoie true si le robot peut aller faire le plein, false sinon
+    public static boolean fairePlein(Simulateur simu, Robot robot, long tpsDebut) {
+        Carte map = robot.getCarte();
+        Case start = robot.getPosition();
+        int nbL = map.getNbLignes();
+        int nbC = map.getNbColonnes();
+        int posL = start.getLigne();
+        int posC = start.getColonne();
+        double temps[][] = new double[nbL][nbC];
+        boolean lock[][] = new boolean[nbL][nbC];
+        Direction pred[][] = new Direction[nbL][nbC];
+        for (int i=0; i<nbL; i++) {
+            for (int j=0; j<nbC; j++) {
+                temps[i][j] = -1;
+                lock[i][j] = false;
+                pred[i][j] = null;
+            }
+        }
+        temps[posL][posC] = 0;
+        LinkedList<Case> sommets = new LinkedList<>();
+        sommets.add(map.getCase(posL, posC));
+        boolean eauTrouvee = false;
+        while (sommets.size() != 0 && !eauTrouvee) {
+            Case cour = sommets.remove();
+            posL = cour.getLigne();
+            posC = cour.getColonne();
+            lock[posL][posC]=true;
+            //Ici, il nous reste à regarder les 4 voisins s'ils sont accessibles
+            //Et les ajouter à la liste et mettre à jour leur temps
+            for (Direction dir : Direction.values()) {
+                if (map.voisinExiste(cour, dir)) {
+                    Case voisin = map.getVoisin(cour, dir);
+                    int posLvoisin = voisin.getLigne();
+                    int posCvoisin = voisin.getColonne();
+                    if (voisin.getNature() == NatureTerrain.EAU) {
+                        eauTrouvee = true;
+                    }
+                    else if (!lock[posLvoisin][posCvoisin]) {
+                        double vit = robot.getVitesse(cour.getNature());
+                        if (vit > 0) {
+                            double time = map.getTailleCases() / vit;
+                            if (temps[posLvoisin][posCvoisin] < 0) {
+                                temps[posLvoisin][posCvoisin] = time + temps[posL][posC];
+                                pred[posLvoisin][posCvoisin] = dir;
+                                insereTrieCase(temps, sommets, map.getCase(posLvoisin, posCvoisin));
+                            } else if (time + temps[posL][posC] < temps[posLvoisin][posCvoisin]) {
+                                temps[posLvoisin][posCvoisin] = time + temps[posL][posC];
+                                pred[posLvoisin][posCvoisin] = dir;
+                                updateCase(temps, sommets, map.getCase(posLvoisin, posCvoisin));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (!eauTrouvee) {
+            return false;
+        }
+        else {
+            Case cour = map.getCase(posL, posC);
+            int posLstart = start.getLigne();
+            int posCstart = start.getColonne();
+            int posLcour = posL;
+            int posCcour = posC;
+            while (posLcour != posLstart || posCcour != posCstart) {
+                Deplacement e = new Deplacement((long) temps[posLcour][posCcour]+tpsDebut, robot, pred[posLcour][posCcour]);
+                simu.ajouteEvenement(e, simu.evenements);
+                Direction dirInv;
+                if (pred[posLcour][posCcour]==Direction.NORD || pred[posLcour][posCcour]==Direction.SUD) {
+                    dirInv = pred[posLcour][posCcour]==Direction.NORD?Direction.SUD:Direction.NORD;
+                }
+                else {
+                    dirInv = pred[posLcour][posCcour]==Direction.OUEST?Direction.EST:Direction.OUEST;
+                }
+                cour = map.getVoisin(cour, dirInv);
+                posLcour = cour.getLigne();
+                posCcour = cour.getColonne();
+            }
+            RemplirReservoir e = new RemplirReservoir((long) temps[posL][posC]+tpsDebut, robot, simu);
+            simu.ajouteEvenement(e, simu.evenements);
+            return true;
         }
     }
 
