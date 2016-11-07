@@ -130,7 +130,9 @@ public abstract class Robot {
 
 	public abstract Robot copierRobot();
 	
-	// public abstract void remplirReservoir();
+	public void intervient(Incendie fire) {
+		
+	}
 	
 	public String toString() {
 		return ("sur la " + this.position + " \n vitesse: " + vitesse + " \n vitesse d'extinction : " + vitDever

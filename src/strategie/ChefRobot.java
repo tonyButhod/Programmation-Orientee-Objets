@@ -7,15 +7,11 @@ import java.util.*;
 import java.util.ListIterator;
 
 public abstract class ChefRobot {
-    protected List<Incendie> incendies = null;
-    protected List<Robot> robotsLibres = null;
+    private List<Incendie> incendies = null;
+    private List<Robot> robotsLibres = null;
     
     public ChefRobot(DonneesSimulation DS){
-    	
-    	ListIterator<Robot> le = DS.getRobots().listIterator();
-    	for (Robot r:this.robotsLibres){
-			this.robotsLibres.add(r);
-		}
+    	robotsLibres = new ArrayList<Robot>(DS.getRobots());
 		this.incendies = DS.getIncendies();
 	}
 
@@ -37,4 +33,8 @@ public abstract class ChefRobot {
 
 	public abstract void executeStrategie();
 
+	public void leaveAMessage(Robot r) {
+		// Hi it's me, I just finished my work, kiss !
+
+	}
 }
