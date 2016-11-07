@@ -22,7 +22,7 @@ public class TestIntervention {
             
             Evenement dN = new Deplacement(10, robot, Direction.NORD);
 
-            aff.ajouteEvenement(dN, aff.evenements);
+            aff.ajouteEvenement(dN);
             
             //On remplit le robot artificiellement, pour tester seulement l'extinction du feu
             robot.setVolEau(robot.getVolEauMax());
@@ -44,7 +44,7 @@ public class TestIntervention {
 			System.out.println("Le robot " + robot.toString() + " va intervenir sur l'incendie " + incendie.toString());
             
             Evenement interFeu = new Intervention(40, robot, incendie, aff);
-            aff.ajouteEvenement(interFeu, aff.evenements);
+            aff.ajouteEvenement(interFeu);
         } 
         catch (FileNotFoundException e) {
             System.out.println(e);

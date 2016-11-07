@@ -29,7 +29,7 @@ public class Intervention extends Evenement {
 		}
 		else if (this.incendie.getLitresEau() > 0){
 			Evenement prochainDever = new Intervention(this.getDate()+1, this.getRobot(), this.incendie, this.simu);
-			simu.ajouteEvenement(prochainDever, simu.evenementsAAjouter);
+			simu.ajouteEvenement(prochainDever);
 			this.getRobot().setDateOccupe(this.getDate()+1);
 		}
 		System.out.println("Date : " + this.getDate() + "Intensite : " + this.incendie.getLitresEau());

@@ -47,8 +47,8 @@ public class Simulateur implements Simulable {
 		return this.dateSimulation;
 	}
 
-	public void ajouteEvenement(Evenement e, LinkedList<Evenement> list) {
-		ListIterator<Evenement> le = list.listIterator();
+	public void ajouteEvenement(Evenement e) {
+		ListIterator<Evenement> le = evenementsAAjouter.listIterator();
 		while (le.hasNext()) {
 			if (le.next().getDate() > e.getDate()) {
 				le.previous();
@@ -56,6 +56,23 @@ public class Simulateur implements Simulable {
 			}
 		}
 		le.add(e);
+	}
+
+	private void updateEvents() {
+		ListIterator<Evenement> le = evenements.listIterator();
+		ListIterator<Evenement> leAdd = evenementsAAjouter.listIterator();
+		Evenement e = le.hasNext() ? le.next() : null;
+		while (leAdd.hasNext()) {
+			Evenement eAdd = leAdd.next();
+			while (e != null && e.getDate()<eAdd.getDate() && le.hasNext()) {
+				e = le.next();
+			}
+			if (e != null) {
+				le.previous();
+			}
+			le.add(eAdd);
+			leAdd.remove();
+		}
 	}
 
 	public void incrementeDate() {
@@ -82,25 +99,20 @@ public class Simulateur implements Simulable {
 
 	@Override
 	public void next() {
-
 		try {
+			updateEvents();
 			if (simulationTerminee()) {
 				return;
 			}
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
-				if (dateSimulation >= e.getRobot().getDateOccupe()) {
-					e.execute();
-				}
+				//if (dateSimulation >= e.getRobot().getDateOccupe()) {
+				//	e.execute();
+				//}
+				e.execute();
+				le.remove();
 				e = le.hasNext() ? le.next() : null;
-				evenements.remove();
-			}
-			if (evenementsAAjouter != null) {
-				for (Evenement evt : evenementsAAjouter) {
-					ajouteEvenement(evt, evenements);
-				}
-				evenementsAAjouter.clear();
 			}
 			verifIncendies();
 			incrementeDate();
