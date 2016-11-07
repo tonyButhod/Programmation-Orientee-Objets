@@ -39,7 +39,7 @@ public class TestIntervention {
 			
             //Pour les besoins du test on réduit aussi l'intensité de l'incendie
             //Afin de pouvoir l'éteindre avce juste le robot à roue
-			incendie.setLitresEau(1000.0);
+			incendie.setLitresEau(6000.0);
 			
 			System.out.println("Le robot " + robot.toString() + " va intervenir sur l'incendie " + incendie.toString());
             

@@ -90,8 +90,8 @@ public class Simulateur implements Simulable {
 			if (evenementsAAjouter != null) {
 				for (Evenement evt : evenementsAAjouter) {
 					ajouteEvenement(evt, evenements);
-					evenementsAAjouter.remove();
 				}
+				evenementsAAjouter.clear();
 			}
 			verifIncendies();
 			incrementeDate();

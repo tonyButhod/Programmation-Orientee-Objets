@@ -25,7 +25,7 @@ public class Intervention extends Evenement {
 		}
 		this.getRobot().deverserEau(this.incendie);
 		if (this.getRobot().getVolEau() == 0) {
-			Dijkstra.fairePlein(simu, robot, this.getDate());
+			Dijkstra.fairePlein(simu, this.getRobot(), this.getDate());
 		}
 		else if (this.incendie.getLitresEau() > 0){
 			Evenement prochainDever = new Intervention(this.getDate()+1, this.getRobot(), this.incendie, this.simu);
