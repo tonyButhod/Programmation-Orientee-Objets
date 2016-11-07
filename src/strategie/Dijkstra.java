@@ -127,7 +127,7 @@ public class Dijkstra {
             int posCcour = cour.getColonne();
             while (posLcour != posLstart || posCcour != posCstart) {
                 Deplacement e = new Deplacement((long) temps[posLcour][posCcour]+tpsDebut, robot, pred[posLcour][posCcour]);
-                simu.ajouteEvenement(e, simu.evenements);
+                simu.ajouteEvenement(e, simu.evenementsAAjouter);
                 Direction dirInv;
                 if (pred[posLcour][posCcour]==Direction.NORD || pred[posLcour][posCcour]==Direction.SUD) {
                     dirInv = pred[posLcour][posCcour]==Direction.NORD?Direction.SUD:Direction.NORD;
@@ -210,7 +210,7 @@ public class Dijkstra {
             int posCcour = posC;
             while (posLcour != posLstart || posCcour != posCstart) {
                 Deplacement e = new Deplacement((long) temps[posLcour][posCcour]+tpsDebut, robot, pred[posLcour][posCcour]);
-                simu.ajouteEvenement(e, simu.evenements);
+                simu.ajouteEvenement(e, simu.evenementsAAjouter);
                 Direction dirInv;
                 if (pred[posLcour][posCcour]==Direction.NORD || pred[posLcour][posCcour]==Direction.SUD) {
                     dirInv = pred[posLcour][posCcour]==Direction.NORD?Direction.SUD:Direction.NORD;
@@ -223,7 +223,7 @@ public class Dijkstra {
                 posCcour = cour.getColonne();
             }
             RemplirReservoir e = new RemplirReservoir((long) temps[posL][posC]+tpsDebut, robot, simu);
-            simu.ajouteEvenement(e, simu.evenements);
+            simu.ajouteEvenement(e, simu.evenementsAAjouter);
             return true;
         }
     }

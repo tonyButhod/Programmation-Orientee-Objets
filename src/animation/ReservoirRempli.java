@@ -10,8 +10,13 @@ public class ReservoirRempli extends Evenement {
 
 	@Override
 	public void execute() {
-		RobotEau robot1 = (RobotEau) this.getRobot();
-		robot1.setVolEau(robot1.getVolEauMax());
-		System.out.println(robot1);
+		Robot robot = this.getRobot();
+		if (robot.getVolEauMax() != -1) {
+			robot.setVolEau(robot.getVolEauMax());
+		}
+		else {
+			System.out.println("Oh oh, on essaye de remplir un robot à patte.");
+		}
+		System.out.println(robot);
 	}
 }

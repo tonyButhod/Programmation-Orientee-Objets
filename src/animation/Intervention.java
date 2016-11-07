@@ -2,7 +2,7 @@ package animation;
 
 import objects.Robot;
 import objects.Incendie;
-import objects.DonneesSimulation;
+import strategie.Dijkstra;
 
 import exception.*;
 
@@ -23,7 +23,11 @@ public class Intervention extends Evenement {
 		if (! this.estSurIncendie()) {
 			throw new ExecutionEvenementException("Intervention", "Robot pas sur l'incendie");
 		}
-		if (! this.getRobot().deverserEau(this.incendie)) {
+		this.getRobot().deverserEau(this.incendie);
+		if (this.getRobot().getVolEau() == 0) {
+			Dijkstra.fairePlein(simu, this.getRobot(), this.getDate());
+		}
+		else if (this.incendie.getLitresEau() > 0){
 			Evenement prochainDever = new Intervention(this.getDate()+1, this.getRobot(), this.incendie, this.simu);
 			simu.ajouteEvenement(prochainDever, simu.evenementsAAjouter);
 			this.getRobot().setDateOccupe(this.getDate()+1);

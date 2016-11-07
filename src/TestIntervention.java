@@ -18,7 +18,7 @@ public class TestIntervention {
             Simulateur aff = new Simulateur(gui, DS);
             
             //Le robot utilisé est un robot à roue, qui peut se remplir car étant un RobotEau
-            RobotEau robot = (RobotEau) DS.getRobots().get(1);
+            objects.Robot robot = DS.getRobots().get(1);
             
             Evenement dN = new Deplacement(10, robot, Direction.NORD);
 
@@ -39,7 +39,7 @@ public class TestIntervention {
 			
             //Pour les besoins du test on réduit aussi l'intensité de l'incendie
             //Afin de pouvoir l'éteindre avce juste le robot à roue
-			incendie.setLitresEau(1000.0);
+			incendie.setLitresEau(6000.0);
 			
 			System.out.println("Le robot " + robot.toString() + " va intervenir sur l'incendie " + incendie.toString());
             

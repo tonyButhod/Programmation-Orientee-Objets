@@ -107,13 +107,13 @@ exeTestCarte: TestCarte
 exeTestSimu: TestSimu
 	java -classpath bin:bin/gui.jar TestSimulateur
 
-exeTestDeplacement:
+exeTestDeplacement: TestDeplacement
 	java -classpath bin:bin/gui.jar TestDeplacement
 
-exeTestRemplissage:
+exeTestRemplissage: TestRemplissage
 	java -classpath bin:bin/gui.jar TestRemplissage
 
-exeTestIntervention:
+exeTestIntervention: TestIntervention
 	java -classpath bin:bin/gui.jar TestIntervention
 
 exeTestStrat: TestStrat
@@ -122,13 +122,13 @@ exeTestStrat: TestStrat
 exeTestDijkstra: TestDijkstra
 	java -classpath bin:bin/gui.jar TestDijkstra
 
-exeTestIncendie:
+exeTestIncendie: TestIncendie
 	java -classpath bin TestIncendie
 
-exeTestDonnees:
+exeTestDonnees: TestDonnes
 	java -classpath bin TestDonnees
 
-exeTestRobot:
+exeTestRobot: TestRobot
 	java -classpath bin TestRobot
 
 clean:

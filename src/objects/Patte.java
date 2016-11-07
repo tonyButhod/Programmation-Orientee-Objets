@@ -8,6 +8,8 @@ public class Patte extends Robot {
 		this.vitesse = 30;
 		this.vitDever = 10.0;
 		this.image += "pattes.png";
+		super.volEau = super.vitDever; //Il restera inchangé car il ne se vide pas
+		super.volEauMax = -1; //Permet de reconnaitre un robot à patte
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -19,24 +21,13 @@ public class Patte extends Robot {
 		}
 		return super.vitesse;
 	}
-	
-	public boolean peutSeRemplir(){
+
+	//Par sécurité, mais est normalement inutile
+	@Override
+	public boolean peutSeRemplir() {
 		return false;
 	}
-	
-	@Override
-	public boolean deverserEau(Incendie incendie) {
-		double intensiteApresDever = incendie.getLitresEau() - this.getVitDever();
-		if (intensiteApresDever <= 0.0) {
-			incendie.setLitresEau(0.0);
-			return true;
-		}
-		else {
-			incendie.setLitresEau(intensiteApresDever);
-			return false;
-		}
-	}
-	
+
 	@Override
 	public String toString() {
 		return ("Robot à pattes " + super.toString() + "\n");
