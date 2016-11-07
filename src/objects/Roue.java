@@ -1,19 +1,20 @@
 package objects;
 
-public class Roue extends RobotEau {
+public class Roue extends Robot {
 
 	public Roue(Case position, Carte carte, double vitesse) {
 
-		super(position, carte, 5000, 10); //10*60
+		super(position, carte, 10); //10*60
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");
-			this.vitesse = 80;
+			super.vitesse = 80;
 		} else {
-			this.vitesse = vitesse;
+			super.vitesse = vitesse;
 		}
-		this.vitDever = 20.0;
 		this.image += "roue.png";
+		super.vitDever = 20.0;
+		super.volEauMax = 5000;
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -23,10 +24,6 @@ public class Roue extends RobotEau {
 		else {
 			return -1;
 		}
-	}
-	
-	public boolean peutSeRemplir(){
-		return this.eauCote();
 	}
 
 	@Override
