@@ -39,17 +39,17 @@ public class DonneesSimulation {
     }
 
     public DonneesSimulation copierDonnees() {
-    	List <Incendie> incendiesBase = new ArrayList<Incendie> (this.incendies);
+    	List <Incendie> incendiesCopies = new ArrayList<Incendie> (this.incendies);
     	for(int i = 0; i < incendies.size(); i++){
     		Incendie feu = incendies.get(i);
-    		incendiesBase.set(i, feu.copierIncendie());
+    		incendiesCopies.set(i, feu.copierIncendie());
     	}
-    	List <Robot> robotsBase = new ArrayList<Robot> (this.robots);
-    	//TO DO : copie de chaque Robot de la liste
-//    	for(int i = 0; i < robots.size(); i++){
-//    		//Copie Robot
-//    	}
-    	DonneesSimulation donneesCopiees = new DonneesSimulation(this.carte, incendiesBase, robotsBase);
+    	List <Robot> robotsCopies = new ArrayList<Robot> (this.robots);
+    	for(int i = 0; i < robots.size(); i++){
+    		Robot robot = robots.get(i);
+    		robotsCopies.set(i, robot.copierRobot());
+    	}
+    	DonneesSimulation donneesCopiees = new DonneesSimulation(this.carte, incendiesCopies, robotsCopies);
     	return donneesCopiees;
     }
 }

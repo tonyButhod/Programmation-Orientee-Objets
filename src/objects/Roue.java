@@ -1,10 +1,13 @@
 package objects;
 
 public class Roue extends Robot {
+	
+	public Roue(Roue roue){
+		super(roue);
+	}
 
 	public Roue(Case position, Carte carte, double vitesse) {
-
-		super(position, carte, 10); //10*60
+		super(position, carte, 10, 0, 5000, 20.0, "roue.png"); //10*60
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");
@@ -12,9 +15,6 @@ public class Roue extends Robot {
 		} else {
 			super.vitesse = vitesse;
 		}
-		this.image += "roue.png";
-		super.vitDever = 20.0;
-		super.volEauMax = 5000;
 	}
 
 	public double getVitesse(NatureTerrain NT) {
@@ -24,6 +24,11 @@ public class Roue extends Robot {
 		else {
 			return -1;
 		}
+	}
+	
+	public Robot copierRobot(){
+		Roue roue = new Roue(this);
+		return roue;
 	}
 
 	@Override
