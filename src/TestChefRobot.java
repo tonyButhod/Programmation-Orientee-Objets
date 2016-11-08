@@ -4,6 +4,7 @@ import io.LecteurDonnees;
 import objects.*;
 import animation.*;
 import strategie.*;
+import exception.*;
 
 import java.io.FileNotFoundException;
 import java.util.zip.DataFormatException;

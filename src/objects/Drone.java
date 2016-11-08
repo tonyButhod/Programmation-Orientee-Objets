@@ -7,7 +7,7 @@ public class Drone extends Robot {
 	}
 	
 	public Drone(Case position, Carte carte, double vitesse) {
-		super(position, carte, 30*60, 10000, 10000, 1/3*1000.0, "drone.png");
+		super(position, carte, 30*60, 10000, 10000, 334, "drone.png");
 		
 		if (vitesse > 150 || vitesse <0){
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
@@ -27,8 +27,8 @@ public class Drone extends Robot {
 	}
 	
 	@Override
-	public boolean peutSeRemplir(){
-		return (this.getPosition().getNature() == NatureTerrain.EAU);
+	public boolean peutSeRemplir(Case pos){
+		return (pos.getNature() == NatureTerrain.EAU);
 	}
 
 	

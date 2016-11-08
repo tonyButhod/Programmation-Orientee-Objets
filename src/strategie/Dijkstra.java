@@ -178,7 +178,7 @@ public class Dijkstra {
                     Case voisin = map.getVoisin(cour, dir);
                     int posLvoisin = voisin.getLigne();
                     int posCvoisin = voisin.getColonne();
-                    if (voisin.getNature() == NatureTerrain.EAU) {
+                    if (robot.peutSeRemplir(cour)) {
                         eauTrouvee = true;
                     }
                     else if (!lock[posLvoisin][posCvoisin]) {

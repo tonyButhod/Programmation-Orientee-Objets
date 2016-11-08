@@ -30,7 +30,7 @@ public class Patte extends Robot {
 
 	//Par sécurité, mais est normalement inutile
 	@Override
-	public boolean peutSeRemplir() {
+	public boolean peutSeRemplir(Case pos) {
 		return false;
 	}
 

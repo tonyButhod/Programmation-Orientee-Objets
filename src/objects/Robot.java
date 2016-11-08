@@ -103,10 +103,9 @@ public abstract class Robot {
 		return image;
 	}
 
-	public boolean peutSeRemplir() {
+	public boolean peutSeRemplir(Case pos) {
 		// Normalement un robot patte ne devrait jamais appeler cette fonction
 		// Il faudra redéfinir cette fonction pour le drone
-		Case pos = this.getPosition();
 		for (Direction dir : Direction.values()) {
 			if (carte.voisinExiste(pos, dir)) {
 				Case voisin = carte.getVoisin(pos, dir);

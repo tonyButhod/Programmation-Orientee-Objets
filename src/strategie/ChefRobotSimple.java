@@ -1,4 +1,5 @@
 package strategie;
+
 import objects.*;
 import animation.*;
 
@@ -38,6 +39,6 @@ public class ChefRobotSimple extends ChefRobot {
 
 	public void leaveAMessage(Robot r) {
 		//Fonction appelée lorsque le robot a fini sont travail
-		getRobotsLibres().add(r);
+		//getRobotsLibres().add(r);
 	}
 }

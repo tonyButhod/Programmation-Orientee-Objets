@@ -2,6 +2,7 @@ package strategie;
 
 import objects.*;
 import animation.*;
+import exception.*;
 
 import java.util.*;
 import java.util.ListIterator;
