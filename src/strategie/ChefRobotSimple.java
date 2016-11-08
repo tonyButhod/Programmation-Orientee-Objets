@@ -14,7 +14,6 @@ public class ChefRobotSimple extends ChefRobot {
 	public void executeStrategie() {
 		if (super.getRobotsLibres().size() == 0) {
 			// Garantit qu'il y ai au moins un robot de libre
-			System.out.println("pas de robots libres !");
 			return;
 		}
 		ListIterator<Incendie> li = super.getIncendies().listIterator();
@@ -42,5 +41,6 @@ public class ChefRobotSimple extends ChefRobot {
 
 	public void leaveAMessage(Robot r) {
 		this.setRobotLibre(r);
+		System.out.println(r.getClass());
 	}
 }

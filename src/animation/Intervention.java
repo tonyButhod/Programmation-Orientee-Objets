@@ -20,8 +20,7 @@ public class Intervention extends Evenement {
 	
 	@Override
 	public void execute() throws ExecutionEvenementException{
-		System.out.println("execute intervention");
-		if (! this.estSurIncendie()) {
+		if (!this.estSurIncendie()) {
 			throw new ExecutionEvenementException("Intervention", "Robot pas sur l'incendie");
 		}
 		this.getRobot().deverserEau(this.incendie);
@@ -33,7 +32,7 @@ public class Intervention extends Evenement {
 			simu.ajouteEvenement(prochainDever);
 			this.getRobot().setDateOccupe(this.getDate()+1);
 		}
-		else if (this.incendie.getLitresEau() == 0){
+		else {
 			Robot r = this.getRobot();
 			r.getChefRobot().leaveAMessage(r);
 		}
