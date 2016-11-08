@@ -5,6 +5,7 @@ import java.util.*;
 
 import gui.*;
 import objects.*;
+import strategie.*;
 
 import exception.*;
 
@@ -19,6 +20,8 @@ public class Simulateur implements Simulable {
 	private long dateSimulation;
 	private LinkedList<Evenement> evenements;
 	private LinkedList<Evenement> evenementsAAjouter;
+	private ChefRobot chef;
+	
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
@@ -30,7 +33,8 @@ public class Simulateur implements Simulable {
 
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
-		this.evenementsAAjouter = new LinkedList<Evenement>();
+		this.evenementsAAjouter = new LinkedList<Evenement>();	
+		this.chef = new ChefRobotSimple(this.donnees, this);
 
 		draw();
 	}
@@ -92,6 +96,7 @@ public class Simulateur implements Simulable {
 	@Override
 	public void next() {
 		try {
+			this.chef.executeStrategie();
 			updateEvents();
 			if (simulationTerminee()) {
 				return;
@@ -101,6 +106,7 @@ public class Simulateur implements Simulable {
 			while (e != null && e.getDate() <= dateSimulation) {
 				if (dateSimulation >= e.getRobot().getDateOccupe()) {
 					e.execute();
+					System.out.println("execution ok");
 				}
 				le.remove();
 				e = le.hasNext() ? le.next() : null;
@@ -108,6 +114,8 @@ public class Simulateur implements Simulable {
 			verifIncendies();
 			incrementeDate();
 			draw();
+			
+			
 		} catch (ExecutionEvenementException e) {
 			System.out.println(e);
 			evenements.remove();
@@ -179,7 +187,7 @@ public class Simulateur implements Simulable {
 			// supprimés de la liste
 			position = incendies.get(i).getPosition();
 			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne() + 0.5) * lenCaseWidth),
-					(int) ((position.getLigne() + 0.5) * lenCaseHeight), "images/incendie.png", lenCaseWidth,
+					(int) ((position.getLigne() + 0.5) * lenCaseHeight), "images/Fire.gif", lenCaseWidth,
 					lenCaseHeight, null));
 		}
 	}

@@ -20,6 +20,7 @@ public class Intervention extends Evenement {
 	
 	@Override
 	public void execute() throws ExecutionEvenementException{
+		System.out.println("execute intervention");
 		if (! this.estSurIncendie()) {
 			throw new ExecutionEvenementException("Intervention", "Robot pas sur l'incendie");
 		}

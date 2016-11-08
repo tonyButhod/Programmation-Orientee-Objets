@@ -11,17 +11,19 @@ public class ChefRobotSimple extends ChefRobot {
 		super(DS, simu);
 	}
 
-	public void executeStrategie(){
+	public void executeStrategie() {
 		if (super.getRobotsLibres().size() == 0) {
-			//Garantit qu'il y ai au moins un robot de libre
+			// Garantit qu'il y ai au moins un robot de libre
+			System.out.println("pas de robots libres !");
 			return;
 		}
 		ListIterator<Incendie> li = super.getIncendies().listIterator();
-		while(li.hasNext()) {
+		ListIterator<Robot> lr=null;
+		while (li.hasNext() && super.getRobotsLibres().size() != 0) {
 			Incendie fire = li.next();
 			Case posFire = fire.getPosition();
-			ListIterator<Robot> lr = super.getRobotsLibres().listIterator();
-			Robot robotMin = lr.next(); //Garanti par la première condition
+			lr = super.getRobotsLibres().listIterator();
+			Robot robotMin = lr.next(); // Garanti par la première condition
 			long tpsMin = Dijkstra.tempsMin(robotMin, posFire);
 			while (lr.hasNext()) {
 				Robot r = lr.next();
@@ -31,14 +33,14 @@ public class ChefRobotSimple extends ChefRobot {
 					tpsMin = tps;
 				}
 			}
-			//Ici, on possède le robot le plus proche de l'incendie et on lui dit d'y aller
+			// Ici, on possède le robot le plus proche de l'incendie et on
+			// lui dit d'y aller
 			getRobotsLibres().remove(robotMin);
 			robotMin.intervient(getSimu(), fire);
 		}
 	}
 
 	public void leaveAMessage(Robot r) {
-		//Fonction appelée lorsque le robot a fini sont travail
-		//getRobotsLibres().add(r);
+		this.setRobotLibre(r);
 	}
 }

@@ -133,7 +133,7 @@ exeTestDonnees: TestDonnes
 exeTestRobot: TestRobot
 	java -classpath bin:bin/gui.jar -classpath bin TestRobot
 
-exeTestChefRobot: TestChefRobot
+exeTestChefRobot: TestChefRobot objects
 	java -classpath bin:bin/gui.jar TestChefRobot
 clean:
 	rm -rf bin/src/ bin/exception/ bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~

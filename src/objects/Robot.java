@@ -150,8 +150,9 @@ public abstract class Robot {
 			System.out.println("Le chef demande au robot d'éteindre un feu inatteignable");
 			return;
 		}
-		Evenement eteind = new Intervention(simu.getDateSimu()+tps, this, fire, simu);
-		simu.ajouteEvenement(eteind);
+		System.out.println("intervention en cours");
+		Evenement eteint = new Intervention(simu.getDateSimu()+tps, this, fire, simu);
+		simu.ajouteEvenement(eteint);
 	}
 	
 	public String toString() {
