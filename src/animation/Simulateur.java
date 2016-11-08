@@ -54,18 +54,31 @@ public class Simulateur implements Simulable {
 	}
 
 	private void updateEvents() {
+		if (evenements.size() == 0) {
+			LinkedList<Evenement> temporaire = evenements;
+			evenements = evenementsAAjouter;
+			evenementsAAjouter = temporaire;
+			return;
+		}
+		//Ici, evenement possède au moins un élément
 		ListIterator<Evenement> le = evenements.listIterator();
 		ListIterator<Evenement> leAdd = evenementsAAjouter.listIterator();
-		Evenement e = le.hasNext() ? le.next() : null;
 		while (leAdd.hasNext()) {
 			Evenement eAdd = leAdd.next();
-			while (e != null && e.getDate()<eAdd.getDate() && le.hasNext()) {
-				e = le.next();
-			}
-			if (e != null) {
+			while (le.hasNext() && le.next().getDate() < eAdd.getDate());
+			le.previous();
+			le.add(eAdd);
+			//Les 2 conditions suivantes permettent de prendre en compte le nouvel élément
+			//inséré par le liste iterator
+			if (le.hasNext()) {
+				le.next();
 				le.previous();
 			}
-			le.add(eAdd);
+			else {
+				le.previous();
+				le.next();
+				le.next();
+			}
 			leAdd.remove();
 		}
 	}
@@ -106,7 +119,6 @@ public class Simulateur implements Simulable {
 			while (e != null && e.getDate() <= dateSimulation) {
 				if (dateSimulation >= e.getRobot().getDateOccupe()) {
 					e.execute();
-					System.out.println("execution ok");
 				}
 				le.remove();
 				e = le.hasNext() ? le.next() : null;
