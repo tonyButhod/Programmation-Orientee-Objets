@@ -32,6 +32,10 @@ public class Intervention extends Evenement {
 			simu.ajouteEvenement(prochainDever);
 			this.getRobot().setDateOccupe(this.getDate()+1);
 		}
+		else if (this.incendie.getLitresEau() == 0){
+			Robot r = this.getRobot();
+			r.getChefRobot().leaveAMessage(r);
+		}
 		System.out.println("Date : " + this.getDate() + "Intensite : " + this.incendie.getLitresEau());
 	}
 

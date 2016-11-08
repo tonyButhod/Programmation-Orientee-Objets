@@ -17,6 +17,8 @@ public class ReservoirRempli extends Evenement {
 		else {
 			System.out.println("Oh oh, on essaye de remplir un robot à patte.");
 		}
-		System.out.println(robot);
+		//System.out.println(robot);
+		//Le robot avertit le chef qu'il a fini son travail
+		robot.getChefRobot().leaveAMessage(robot);
 	}
 }

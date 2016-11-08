@@ -6,8 +6,8 @@ import java.util.ListIterator;
 
 public class ChefRobotSimple extends ChefRobot {
 	
-	public ChefRobotSimple(DonneesSimulation DS){
-		super(DS);		
+	public ChefRobotSimple(DonneesSimulation DS, Simulateur simu){
+		super(DS, simu);
 	}
 
 	public void executeStrategie(){
@@ -32,7 +32,12 @@ public class ChefRobotSimple extends ChefRobot {
 			}
 			//Ici, on possède le robot le plus proche de l'incendie et on lui dit d'y aller
 			getRobotsLibres().remove(robotMin);
-			robotMin.intervient(fire);
+			robotMin.intervient(getSimu(), fire);
 		}
+	}
+
+	public void leaveAMessage(Robot r) {
+		//Fonction appelée lorsque le robot a fini sont travail
+		getRobotsLibres().add(r);
 	}
 }

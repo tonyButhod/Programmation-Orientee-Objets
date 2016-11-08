@@ -9,10 +9,17 @@ import java.util.ListIterator;
 public abstract class ChefRobot {
     private List<Incendie> incendies = null;
     private List<Robot> robotsLibres = null;
+	private Simulateur simu;
     
-    public ChefRobot(DonneesSimulation DS){
+    public ChefRobot(DonneesSimulation DS, Simulateur simu){
     	robotsLibres = new ArrayList<Robot>(DS.getRobots());
 		this.incendies = DS.getIncendies();
+		this.simu = simu;
+		//Il faut aussi dire aux robots qui est leur chef
+		ListIterator<Robot> lr = robotsLibres.listIterator();
+		while (lr.hasNext()) {
+			lr.next().setChefRobot(this);
+		}
 	}
 
 	public List<Incendie> getIncendies() {
@@ -27,14 +34,15 @@ public abstract class ChefRobot {
 		this.robotsLibres.add(robot);
 	}
 
+	public Simulateur getSimu() {
+		return this.simu;
+	}
+
 	public void removeRobotLibre(Robot robot) {
 		this.robotsLibres.remove(robot);
 	}
 
 	public abstract void executeStrategie();
 
-	public void leaveAMessage(Robot r) {
-		// Hi it's me, I just finished my work, kiss !
-
-	}
+	public abstract void leaveAMessage(Robot r);
 }

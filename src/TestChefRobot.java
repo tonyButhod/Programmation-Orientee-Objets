@@ -16,11 +16,14 @@ public class TestChefRobot {
 			
 			GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
 			DonneesSimulation DS = LecteurDonnees.lire("cartes/carteSujet.map");
-			ChefRobot chef = new ChefRobotSimple(DS);
+			Simulateur simu = new Simulateur(gui, DS);
+			ChefRobot chef = new ChefRobotSimple(DS, simu);
 			
-			for (Robot r :chef.getRobotsLibres()){
+			for (Robot r : chef.getRobotsLibres()){
 				System.out.println(r);
 			}
+
+			chef.executeStrategie();
 			
 		} catch (
 

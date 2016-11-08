@@ -1,5 +1,8 @@
 package objects;
 
+import strategie.*;
+import animation.*;
+
 /** Robot est une classe en partie abstraite */
 public abstract class Robot {
 	private Case position;
@@ -9,6 +12,7 @@ public abstract class Robot {
 	protected double volEau;
 	protected double volEauMax;
 	private Carte carte;
+	private ChefRobot chef;
 	protected String image = "images/"; // Pour le dessin des robots
 	private long dateOccupe;
 
@@ -20,6 +24,7 @@ public abstract class Robot {
 		this.volEau = robot.volEau;
 		this.volEauMax = robot.volEauMax;
 		this.carte = robot.carte;
+		this.chef = robot.chef;
 		this.image = robot.image;
 		this.dateOccupe = robot.dateOccupe;
 	}
@@ -50,6 +55,14 @@ public abstract class Robot {
 
 	public Carte getCarte() {
 		return this.carte;
+	}
+
+	public ChefRobot getChefRobot() {
+		return this.chef;
+	}
+
+	public void setChefRobot(ChefRobot chef) {
+		this.chef = chef;
 	}
 
 	public abstract double getVitesse(NatureTerrain NT);
@@ -95,9 +108,11 @@ public abstract class Robot {
 		// Il faudra redéfinir cette fonction pour le drone
 		Case pos = this.getPosition();
 		for (Direction dir : Direction.values()) {
-			Case voisin = carte.getVoisin(pos, dir);
-			if (voisin.getNature() == NatureTerrain.EAU) {
-				return true;
+			if (carte.voisinExiste(pos, dir)) {
+				Case voisin = carte.getVoisin(pos, dir);
+				if (voisin.getNature() == NatureTerrain.EAU) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -130,8 +145,14 @@ public abstract class Robot {
 
 	public abstract Robot copierRobot();
 	
-	public void intervient(Incendie fire) {
-		
+	public void intervient(Simulateur simu, Incendie fire) {
+		long tps = Dijkstra.deplaceRobot(simu, this, fire.getPosition(), simu.getDateSimu());
+		if (tps == -1) {
+			System.out.println("Le chef demande au robot d'éteindre un feu inatteignable");
+			return;
+		}
+		Evenement eteind = new Intervention(simu.getDateSimu()+tps, this, fire, simu);
+		simu.ajouteEvenement(eteind);
 	}
 	
 	public String toString() {

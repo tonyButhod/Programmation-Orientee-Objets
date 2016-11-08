@@ -1,18 +1,9 @@
 package animation;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.util.*;
 
-import javax.imageio.ImageIO;
-
-import gui.GUISimulator;
-import gui.Rectangle;
-import gui.Oval;
-import gui.ImageElement;
-import gui.Simulable;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import gui.*;
 import objects.*;
 
 import exception.*;
@@ -92,6 +83,7 @@ public class Simulateur implements Simulable {
 		donnees = donneesBase.copierDonnees();
 		evenements.clear();
 		evenementsAAjouter.clear();
+		dateSimulation = 0;
 		// Rappeler la fonction qui calcule tous les déplacements initiaux, ie le chef robot
 		
 		draw();
@@ -107,10 +99,9 @@ public class Simulateur implements Simulable {
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
-				//if (dateSimulation >= e.getRobot().getDateOccupe()) {
-				//	e.execute();
-				//}
-				e.execute();
+				if (dateSimulation >= e.getRobot().getDateOccupe()) {
+					e.execute();
+				}
 				le.remove();
 				e = le.hasNext() ? le.next() : null;
 			}

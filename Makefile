@@ -73,13 +73,13 @@ TestChefRobot: objects src/TestChefRobot.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestChefRobot.java
 
 io: $(IO)
-	javac -d bin -sourcepath src $^
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 objects: $(OBJ)
-	javac -d bin -sourcepath src $^
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 exception: $(EXCEPT)
-	javac -d bin -sourcepath src $^
+	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 animation: $(ANIM)
 	javac -d bin -classpath bin/gui.jar -sourcepath src $^
@@ -125,13 +125,13 @@ exeTestDijkstra: TestDijkstra
 	java -classpath bin:bin/gui.jar TestDijkstra
 
 exeTestIncendie: TestIncendie
-	java -classpath bin TestIncendie
+	java -classpath bin:bin/gui.jar -classpath bin TestIncendie
 
 exeTestDonnees: TestDonnes
-	java -classpath bin TestDonnees
+	java -classpath bin:bin/gui.jar -classpath bin TestDonnees
 
 exeTestRobot: TestRobot
-	java -classpath bin TestRobot
+	java -classpath bin:bin/gui.jar -classpath bin TestRobot
 
 exeTestChefRobot: TestChefRobot
 	java -classpath bin:bin/gui.jar TestChefRobot
