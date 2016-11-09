@@ -101,8 +101,8 @@ public class Simulateur implements Simulable {
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-		// Rappeler la fonction qui calcule tous les déplacements initiaux, ie le chef robot
-		
+		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie le chef robot
+		chef = new ChefRobotSimple(donnees, this);
 		draw();
 	}
 
