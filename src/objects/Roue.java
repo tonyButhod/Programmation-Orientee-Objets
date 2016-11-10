@@ -7,7 +7,7 @@ public class Roue extends Robot {
 	}
 
 	public Roue(Case position, Carte carte, double vitesse) {
-		super(position, carte, 10*60, 5000, 5000, 20.0, "roue.png");
+		super(position, carte, 10*60, 5000, 5000, 20.0, "R2D2.png");
 		
 		if (vitesse < 0) {
 			System.out.println("Vitesse invalide -> vitesse par défault");

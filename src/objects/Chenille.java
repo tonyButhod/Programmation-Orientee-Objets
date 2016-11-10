@@ -7,7 +7,7 @@ public class Chenille extends Robot {
 	}
 
 	public Chenille(Case position, Carte carte, double vitesse) {
-		super(position, carte, 5*60, 2000, 2000, 12.5, "chenille.png");
+		super(position, carte, 5*60, 2000, 2000, 12.5, "WallE.png");
 		
 		if (vitesse > 80 || vitesse < 0) {
 			System.out.println("Vitesse trop élevée -> vitesse par défault");
