@@ -113,12 +113,6 @@ public class Simulateur implements Simulable {
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-<<<<<<< HEAD
-		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie
-		// le chef robot
-		chef = new ChefRobotSimple(donnees, this);
-=======
->>>>>>> 412d527d13eeb2293574617ed64053d1557967b5
 		draw();
 	}
 
@@ -132,10 +126,6 @@ public class Simulateur implements Simulable {
 			if (simulationTerminee()) {
 				return;
 			}
-<<<<<<< HEAD
-			// verifTriee();
-=======
->>>>>>> 412d527d13eeb2293574617ed64053d1557967b5
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
