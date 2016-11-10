@@ -113,8 +113,6 @@ public class Simulateur implements Simulable {
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie le chef robot
-		chef = new ChefRobotSimple(donnees, this);
 		draw();
 	}
 
@@ -126,7 +124,6 @@ public class Simulateur implements Simulable {
 			if (simulationTerminee()) {
 				return;
 			}
-			//verifTriee();
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
@@ -182,23 +179,6 @@ public class Simulateur implements Simulable {
 			out += le.next().getDate() + " ";
 		}
 		return out;
-	}
-
-	public void verifTriee() {
-		ListIterator<Evenement> le = evenements.listIterator();
-		Evenement cour = null;
-		Evenement prec = null;
-		while (le.hasNext()) {
-			cour = le.next();
-			if (prec == null) {
-				prec = cour;
-			}
-			if (prec.getDate()>cour.getDate()) {
-				System.out.println("Liste pas triée !!!");
-				return;
-			}
-			prec = cour;
-		}
 	}
 
 	public void drawRobots() {
