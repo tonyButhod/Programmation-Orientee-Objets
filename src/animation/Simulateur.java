@@ -21,25 +21,29 @@ public class Simulateur implements Simulable {
 	private LinkedList<Evenement> evenements;
 	private LinkedList<Evenement> evenementsAAjouter;
 	private ChefRobot chef;
-	
 
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
 		gui.setSimulable(this); // association a la gui!
 		this.donnees = donnees;
-		this.lenCaseHeight = (gui.getPanelHeight()-50)/donnees.getCarte().getNbLignes(); //On adapte la tille des cases à la fenêtre
-		this.lenCaseWidth = (gui.getPanelWidth()-50)/donnees.getCarte().getNbColonnes();
+		this.lenCaseHeight = (gui.getPanelHeight() - 50) / donnees.getCarte().getNbLignes(); 
+		this.lenCaseWidth = (gui.getPanelWidth() - 50) / donnees.getCarte().getNbColonnes();
 		this.donneesBase = donnees.copierDonnees();
 
 		this.dateSimulation = 0;
 		this.evenements = new LinkedList<Evenement>();
-		this.evenementsAAjouter = new LinkedList<Evenement>();	
-		this.chef = new ChefRobotSimple(this.donnees, this);
+		this.evenementsAAjouter = new LinkedList<Evenement>();
+		this.chef = null;
 
 		draw();
 	}
-	public long getDateSimu(){
+
+	public long getDateSimu() {
 		return this.dateSimulation;
+	}
+
+	public void setChef(ChefRobot chef) {
+		this.chef = chef;
 	}
 
 	public void ajouteEvenement(Evenement e) {
@@ -74,19 +78,15 @@ public class Simulateur implements Simulable {
 				if (e.getDate() <= eAdd.getDate()) {
 					newl.add(e);
 					leAdd.previous();
-				}
-				else {
+				} else {
 					newl.add(eAdd);
 					le.previous();
 				}
-			}
-			else if (le.hasNext()) {
+			} else if (le.hasNext()) {
 				newl.add(le.next());
-			}
-			else if (leAdd.hasNext()) {
+			} else if (leAdd.hasNext()) {
 				newl.add(leAdd.next());
-			}
-			else {
+			} else {
 				continuer = false;
 			}
 		}
@@ -113,7 +113,8 @@ public class Simulateur implements Simulable {
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie le chef robot
+		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie
+		// le chef robot
 		chef = new ChefRobotSimple(donnees, this);
 		draw();
 	}
@@ -121,12 +122,14 @@ public class Simulateur implements Simulable {
 	@Override
 	public void next() {
 		try {
-			this.chef.executeStrategie();
+			if (this.chef != null) {
+				this.chef.executeStrategie();
+			}
 			updateEvents();
 			if (simulationTerminee()) {
 				return;
 			}
-			//verifTriee();
+			// verifTriee();
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
@@ -139,8 +142,7 @@ public class Simulateur implements Simulable {
 			verifIncendies();
 			incrementeDate();
 			draw();
-			
-			
+
 		} catch (ExecutionEvenementException e) {
 			System.out.println(e);
 			evenements.remove();
@@ -154,7 +156,7 @@ public class Simulateur implements Simulable {
 			for (int j = 0; j < carte.getNbColonnes(); j++) {
 				NatureTerrain nature = carte.getCase(i, j).getNature();
 				Color couleur = Color.BLACK;
-				String image="images/";
+				String image = "images/";
 				if (nature == NatureTerrain.EAU) {
 					image += "eau.jpg";
 				} else if (nature == NatureTerrain.ROCHE) {
@@ -166,8 +168,8 @@ public class Simulateur implements Simulable {
 				} else if (nature == NatureTerrain.HABITAT) {
 					image += "maison.png";
 				}
-				gui.addGraphicalElement(new ImageElement((int) ((j+0.5)*lenCaseWidth),
-						(int) ((i+0.5)*lenCaseHeight),image,lenCaseWidth, lenCaseHeight ,null));
+				gui.addGraphicalElement(new ImageElement((int) ((j + 0.5) * lenCaseWidth),
+						(int) ((i + 0.5) * lenCaseHeight), image, lenCaseWidth, lenCaseHeight, null));
 			}
 		}
 		drawIncendies();
@@ -193,7 +195,7 @@ public class Simulateur implements Simulable {
 			if (prec == null) {
 				prec = cour;
 			}
-			if (prec.getDate()>cour.getDate()) {
+			if (prec.getDate() > cour.getDate()) {
 				System.out.println("Liste pas triée !!!");
 				return;
 			}
@@ -206,12 +208,12 @@ public class Simulateur implements Simulable {
 		List<objects.Robot> robots = donnees.getRobots();
 		Color couleur = Color.decode("#8f8f8f");
 		Case position;
-		//ImageObserver io = null;
+		// ImageObserver io = null;
 
 		for (int i = 0; i < robots.size(); i++) {
-			position = robots.get(i).getPosition();		
-			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne()+0.5) * lenCaseWidth), 
-					(int) (( position.getLigne()+0.5) * lenCaseHeight),robots.get(i).getImage(), lenCaseWidth, 
+			position = robots.get(i).getPosition();
+			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne() + 0.5) * lenCaseWidth),
+					(int) ((position.getLigne() + 0.5) * lenCaseHeight), robots.get(i).getImage(), lenCaseWidth,
 					lenCaseHeight, null));
 		}
 	}
@@ -224,16 +226,18 @@ public class Simulateur implements Simulable {
 
 		for (int i = 0; i < incendies.size(); i++) {
 
-			// L'incendie ne doit pas etre dessinne si son intensite est nulle mais
-			// la fonction verifIncendies est appellée avant draw(), les incendies nuls sont donc
+			// L'incendie ne doit pas etre dessinne si son intensite est nulle
+			// mais
+			// la fonction verifIncendies est appellée avant draw(), les
+			// incendies nuls sont donc
 			// supprimés de la liste
 			position = incendies.get(i).getPosition();
 			gui.addGraphicalElement(new ImageElement((int) ((position.getColonne() + 0.5) * lenCaseWidth),
-					(int) ((position.getLigne() + 0.5) * lenCaseHeight), "images/Fire.gif", lenCaseWidth,
-					lenCaseHeight, null));
+					(int) ((position.getLigne() + 0.5) * lenCaseHeight), "images/Fire.gif", lenCaseWidth, lenCaseHeight,
+					null));
 		}
 	}
-	
+
 	private void verifIncendies() {
 		List<Incendie> incendies = donnees.getIncendies();
 		for (int i = 0; i < incendies.size(); i++) {

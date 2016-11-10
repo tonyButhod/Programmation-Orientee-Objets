@@ -16,6 +16,7 @@ public abstract class ChefRobot {
     	robotsLibres = new ArrayList<Robot>(DS.getRobots());
 		this.incendies = DS.getIncendies();
 		this.simu = simu;
+		this.simu.setChef(this);
 		//Il faut aussi dire aux robots qui est leur chef
 		ListIterator<Robot> lr = robotsLibres.listIterator();
 		while (lr.hasNext()) {

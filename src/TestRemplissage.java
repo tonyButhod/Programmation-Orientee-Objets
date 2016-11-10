@@ -18,33 +18,33 @@ public class TestRemplissage {
 			Simulateur aff = new Simulateur(gui, DS);
 			
 			Evenement dN = new Deplacement(10, DS.getRobots().get(1), Direction.NORD);
-			aff.ajouteEvenement(dN, aff.evenements);
+			aff.ajouteEvenement(dN);
 			
 			Evenement dO1 = new Deplacement(20, DS.getRobots().get(1), Direction.OUEST);
-			aff.ajouteEvenement(dO1, aff.evenements);
+			aff.ajouteEvenement(dO1);
 			
 			Evenement dO2 = new Deplacement(30, DS.getRobots().get(1), Direction.OUEST);
-			aff.ajouteEvenement(dO2, aff.evenements);
+			aff.ajouteEvenement(dO2);
 	
 			
 			Evenement remp = new RemplirReservoir(35, DS.getRobots().get(1), aff);
-			aff.ajouteEvenement(remp, aff.evenements);
+			aff.ajouteEvenement(remp);
 		
 			Evenement remperr = new RemplirReservoir(15, DS.getRobots().get(1), aff);
-			aff.ajouteEvenement(remperr, aff.evenements);
+			aff.ajouteEvenement(remperr);
 		
 			
 			Evenement dE1 = new Deplacement(35 + temps +1, DS.getRobots().get(1), Direction.EST);
-			aff.ajouteEvenement(dE1, aff.evenements);
+			aff.ajouteEvenement(dE1);
 	
 			Evenement dE2 = new Deplacement(35 + temps +2, DS.getRobots().get(1), Direction.OUEST);
-			aff.ajouteEvenement(dE2, aff.evenements);
+			aff.ajouteEvenement(dE2);
 			
 			Evenement dE3 = new Deplacement(35 + temps +3, DS.getRobots().get(1), Direction.SUD);
-			aff.ajouteEvenement(dE3, aff.evenements);
+			aff.ajouteEvenement(dE3);
 
 			Evenement dE4 = new Deplacement(40, DS.getRobots().get(1), Direction.NORD);
-			aff.ajouteEvenement(dE4, aff.evenements);
+			aff.ajouteEvenement(dE4);
 
 	
 		} catch (FileNotFoundException e) {
