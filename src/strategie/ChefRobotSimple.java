@@ -41,6 +41,5 @@ public class ChefRobotSimple extends ChefRobot {
 
 	public void leaveAMessage(Robot r) {
 		this.setRobotLibre(r);
-		System.out.println(r.getClass());
 	}
 }
