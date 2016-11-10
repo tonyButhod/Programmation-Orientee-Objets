@@ -54,33 +54,45 @@ public class Simulateur implements Simulable {
 	}
 
 	private void updateEvents() {
+		if (evenementsAAjouter.size() == 0) {
+			return;
+		}
 		if (evenements.size() == 0) {
 			LinkedList<Evenement> temporaire = evenements;
 			evenements = evenementsAAjouter;
 			evenementsAAjouter = temporaire;
 			return;
 		}
-		//Ici, evenement possède au moins un élément
+		LinkedList<Evenement> newl = new LinkedList<Evenement>();
 		ListIterator<Evenement> le = evenements.listIterator();
 		ListIterator<Evenement> leAdd = evenementsAAjouter.listIterator();
-		while (leAdd.hasNext()) {
-			Evenement eAdd = leAdd.next();
-			while (le.hasNext() && le.next().getDate() < eAdd.getDate());
-			le.previous();
-			le.add(eAdd);
-			//Les 2 conditions suivantes permettent de prendre en compte le nouvel élément
-			//inséré par le liste iterator
-			if (le.hasNext()) {
-				le.next();
-				le.previous();
+		boolean continuer = true;
+		while (continuer) {
+			if (le.hasNext() && leAdd.hasNext()) {
+				Evenement e = le.next();
+				Evenement eAdd = leAdd.next();
+				if (e.getDate() <= eAdd.getDate()) {
+					newl.add(e);
+					leAdd.previous();
+				}
+				else {
+					newl.add(eAdd);
+					le.previous();
+				}
+			}
+			else if (le.hasNext()) {
+				newl.add(le.next());
+			}
+			else if (leAdd.hasNext()) {
+				newl.add(leAdd.next());
 			}
 			else {
-				le.previous();
-				le.next();
-				le.next();
+				continuer = false;
 			}
-			leAdd.remove();
 		}
+		evenementsAAjouter.clear();
+		evenements.clear();
+		evenements = newl;
 	}
 
 	public void incrementeDate() {
@@ -101,8 +113,8 @@ public class Simulateur implements Simulable {
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-		// Rappeler la fonction qui calcule tous les déplacements initiaux, ie le chef robot
-		
+		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie le chef robot
+		chef = new ChefRobotSimple(donnees, this);
 		draw();
 	}
 
@@ -114,6 +126,7 @@ public class Simulateur implements Simulable {
 			if (simulationTerminee()) {
 				return;
 			}
+			//verifTriee();
 			ListIterator<Evenement> le = evenements.listIterator();
 			Evenement e = le.hasNext() ? le.next() : null;
 			while (e != null && e.getDate() <= dateSimulation) {
@@ -169,6 +182,23 @@ public class Simulateur implements Simulable {
 			out += le.next().getDate() + " ";
 		}
 		return out;
+	}
+
+	public void verifTriee() {
+		ListIterator<Evenement> le = evenements.listIterator();
+		Evenement cour = null;
+		Evenement prec = null;
+		while (le.hasNext()) {
+			cour = le.next();
+			if (prec == null) {
+				prec = cour;
+			}
+			if (prec.getDate()>cour.getDate()) {
+				System.out.println("Liste pas triée !!!");
+				return;
+			}
+			prec = cour;
+		}
 	}
 
 	public void drawRobots() {
