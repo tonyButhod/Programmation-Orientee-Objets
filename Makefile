@@ -87,7 +87,8 @@ animation: $(ANIM)
 strategie: $(STRAT)
 	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
-
+javadoc:
+	javadoc -private -d doc_cplt -sourcepath src $(STRAT) $(ANIM) $(EXCEPT) $(OBJ) $(IO) -classpath bin/gui.jar
 
 # Execution:
 # on peut taper directement la ligne de commande :

@@ -37,15 +37,11 @@ public class LecteurDonnees {
 	 *            nom du fichier à lire
 	 */
 	public static DonneesSimulation lire(String fichierDonnees)
-			// Liste de Robots créée temporairement, à enlever lors de
-			// l'implémentation de lireRobots()
 			throws FileNotFoundException, DataFormatException {
 		System.out.println("\n == Lecture du fichier " + fichierDonnees);
 		LecteurDonnees lecteur = new LecteurDonnees(fichierDonnees);
 		Carte map = lecteur.lireCarte();
 		List<Incendie> incendies = lecteur.lireIncendies(map);
-		// lecteur.lireRobots();
-		// TEMP
 		List<Robot> robots = lecteur.lireRobots(map);
 
 		DonneesSimulation donnees = new DonneesSimulation(map, incendies, robots);
