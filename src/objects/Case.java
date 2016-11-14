@@ -1,16 +1,25 @@
 package objects;
-/** Classe Case : 
- * -int ligne
- *  -int colonne
- *  -NatureTerrain Nature*/
 
+/**
+ * Classe fournissant l'implémentation de la structure de données représentant une case.
+ */
 public class Case {
 
 	private int ligne;
 	private int colonne;
 	private NatureTerrain nature;
 
-	public Case(int ligne, int colonne, NatureTerrain nature){
+	/**
+	 * Construit une case.
+	 * 
+	 * @param ligne
+	 *            ligne où se situe la case
+	 * @param colonne
+	 *            colonne où se situe la case
+	 * @param nature
+	 *            nature de la case à créer
+	 */
+	public Case(int ligne, int colonne, NatureTerrain nature) {
 		if (ligne < 0 || colonne < 0){
 			throw new IllegalArgumentException ("les coordonnées de la case doivent être positives !");  
 		}
@@ -36,12 +45,21 @@ public class Case {
     }
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return ("Case " + this.ligne + " " + this.colonne + " de nature " + this.nature);
 	}
-	
+
+	/**
+	 * Redéfinition de la methode equals pour les cases.
+	 * 
+	 * @param o
+	 *            case à comparer avec celle sur laquelle la méthode est
+	 *            instanciée
+	 * @return true si les cases sont au même emplacement, false sinon ou si o
+	 *         n'est pas une case
+	 */
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		if (!(o instanceof Case)) {
 			return false;
 		}
