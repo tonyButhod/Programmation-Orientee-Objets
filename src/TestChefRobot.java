@@ -16,14 +16,19 @@ public class TestChefRobot {
 		try{
 			
 			GUISimulator gui = new GUISimulator(800, 600, Color.BLACK);
-			DonneesSimulation DS = LecteurDonnees.lire("cartes/carteSujet.map");
+			DonneesSimulation DS = null;
+			if (args.length == 0) {
+				DS = LecteurDonnees.lire("cartes/carteSujet.map");
+			}
+			else {
+				DS = LecteurDonnees.lire(args[0]);
+			}
+
 			Simulateur simu = new Simulateur(gui, DS);
 			ChefRobot chef = new ChefRobotSimple(DS, simu);
 
 			
-		} catch (
-
-		FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			System.out.println(e);
 		} catch (DataFormatException e) {
 			System.out.println(e);
