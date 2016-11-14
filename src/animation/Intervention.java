@@ -39,7 +39,8 @@ public class Intervention extends Evenement {
 	 * Redéfinition de la fonction execute.
 	 * Vérifie si le robot est bien sur l'incendie désiré (renvoie une exception sinon).
 	 * Si c'est la cas, elle verse l'eau du robot sur l'incendie.
-	 * Si le robot est vide, elle lui ordonne de retourner se remplir.
+	 * Si le robot est vide, elle lui ordonne de retourner se remplir (et
+	 * s'il ne peut pas se remplir, le robot est inutile et n'est pas ajouté aux robots libres).
 	 * Sinon, si le feu n'est toujours pas éteint, l'intervention continue
 	 * (avec la création d'une nouvelle intervention).
 	 * Sinon, le feu est éteint, le robot indique alors au chef robot qu'il a fini.
