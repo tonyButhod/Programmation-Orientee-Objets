@@ -9,6 +9,11 @@ import strategie.*;
 
 import exception.*;
 
+/**
+ * Classe Simulateur qui permet la simulation du problème.
+ * Elle extend Simulable, et définit les fonctions next() et restart()
+ * qui sont utilisées par Simulable pour afficher la simulation à l'écran.
+ */
 public class Simulateur implements Simulable {
 	/** L'interface graphique associée */
 	private GUISimulator gui;
@@ -22,6 +27,19 @@ public class Simulateur implements Simulable {
 	private LinkedList<Evenement> evenementsAAjouter;
 	private ChefRobot chef;
 
+	/**
+	 * Enregistre les paramètres de base du simulateur.
+	 * En plus d'enregistrer les paramètres donnés en arguments, elle définit
+	 * la taille de la fenêtre, fait un copie des données de bases pour restart(),
+	 * définit la date simulation à 0 et initialise les listes et le chef robot à nulle.
+	 * Pour finir elle dessine à l'écran.
+	 *
+	 * @param gui
+	 * 		interface qui gère l'affichage
+	 *
+	 * 	@param donnees
+	 * 		données de la simulation
+	 */
 	public Simulateur(GUISimulator gui, DonneesSimulation donnees) {
 		this.gui = gui;
 		gui.setSimulable(this); // association a la gui!
@@ -46,6 +64,14 @@ public class Simulateur implements Simulable {
 		this.chef = chef;
 	}
 
+	/**
+	 * Ajoute un évènement e à la liste des évènements à ajouter.
+	 * Il va être inséré plus tard dans la liste des évènements dans la fonction
+	 * updateEvents().
+	 *
+	 * @param e
+	 * 		Evènement à ajouter à la liste des évènements.
+	 */
 	public void ajouteEvenement(Evenement e) {
 		ListIterator<Evenement> le = evenementsAAjouter.listIterator();
 		while (le.hasNext()) {
@@ -57,6 +83,10 @@ public class Simulateur implements Simulable {
 		le.add(e);
 	}
 
+	/**
+	 * Procède à la fusion de 2 listes triées pour mettre à jour les
+	 * évènements à exécuter. La nouvelle liste des évènements formée est triée.
+	 */
 	private void updateEvents() {
 		if (evenementsAAjouter.size() == 0) {
 			return;
@@ -95,11 +125,11 @@ public class Simulateur implements Simulable {
 		evenements = newl;
 	}
 
-	public void incrementeDate() {
+	private void incrementeDate() {
 		dateSimulation++;
 	}
 
-	public boolean simulationTerminee() {
+	private boolean simulationTerminee() {
 		// La complexité de size est en O(1) car attribut.
 		if (evenements.size() == 0) {
 			return true;
@@ -107,17 +137,32 @@ public class Simulateur implements Simulable {
 		return false;
 	}
 
+	/**
+	 * Permet de recharger les données de début enregistrées dans
+	 * l'attribut donneesBase, et réinitialise les listes et dateSimulation.
+	 */
 	@Override
 	public void restart() {
 		donnees = donneesBase.copierDonnees();
 		evenements.clear();
 		evenementsAAjouter.clear();
 		dateSimulation = 0;
-		// Rappel de la fonction qui calcule tous les déplacements initiaux, ie le chef robot
-		chef = new ChefRobotSimple(donnees, this);
+		if (this.chef != null) {
+			// On réinitialise le chef robot
+			this.chef.init(donnees.getIncendies(), donnees.getRobots());
+		}
 		draw();
 	}
 
+	/**
+	 * Si la simulation possède un chef robot, elle exécute la stratégie associée.
+	 * Ensuite elle met à jour les évènements, et exécute les évènements si leur date
+	 * est inférieur ou égale à la date simulation.
+	 * Ensuite, elle met à jour les incendies, incrémente la date et dessine.
+	 *
+	 * Remarque : Si une exception est levée, elle est rattrapée et affichée sur la console, et
+	 * l'évènement associé est supprimé avant de passer aux évènements suivants.
+	 */
 	@Override
 	public void next() {
 		try {
@@ -147,6 +192,9 @@ public class Simulateur implements Simulable {
 		}
 	}
 
+	/**
+	 * Dessine la carte avec les incendies et les robots à l'écran.
+	 */
 	private void draw() {
 		gui.reset();
 		Carte carte = this.donnees.getCarte();
@@ -174,16 +222,9 @@ public class Simulateur implements Simulable {
 		drawRobots();
 	}
 
-	@Override
-	public String toString() {
-		String out = "Affichage de la liste triée : ";
-		ListIterator<Evenement> le = evenements.listIterator();
-		while (le.hasNext()) {
-			out += le.next().getDate() + " ";
-		}
-		return out;
-	}
-
+	/**
+	 * Dessine les robots à l'écran.
+	 */
 	public void drawRobots() {
 
 		List<objects.Robot> robots = donnees.getRobots();
@@ -199,6 +240,9 @@ public class Simulateur implements Simulable {
 		}
 	}
 
+	/**
+	 * Dessine les incendies à l'écran.
+	 */
 	public void drawIncendies() {
 
 		List<Incendie> incendies = donnees.getIncendies();
@@ -219,6 +263,10 @@ public class Simulateur implements Simulable {
 		}
 	}
 
+	/**
+	 * Parcourt les incendies, et dès qu'un incendie est éteint (litresEau = 0),
+	 * on le supprime de la liste des incendies.
+	 */
 	private void verifIncendies() {
 		List<Incendie> incendies = donnees.getIncendies();
 		for (int i = 0; i < incendies.size(); i++) {
