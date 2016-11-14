@@ -29,12 +29,14 @@ import objects.*;
 public class LecteurDonnees {
 
 	/**
-	 * Lit et affiche le contenu d'un fichier de donnees (cases, robots et
+	 * Lit et renvoie le contenu d'un fichier de donnees (cases, robots et
 	 * incendies). Ceci est méthode de classe; utilisation:
 	 * LecteurDonnees.lire(fichierDonnees)
 	 * 
 	 * @param fichierDonnees
 	 *            nom du fichier à lire
+	 * @return DonneesSimulation
+	 * 		données de la simulation
 	 */
 	public static DonneesSimulation lire(String fichierDonnees)
 			throws FileNotFoundException, DataFormatException {
@@ -67,9 +69,14 @@ public class LecteurDonnees {
 	}
 
 	/**
-	 * Lit et affiche les donnees de la carte.
+	 * Lit et renvoie les donnees de la carte.
 	 * 
-	 * @throws ExceptionFormatDonnees
+	 * @throws DataFormatException
+	 *
+	 * @return Carte
+	 * 		données de la
+	 *
+	 * 	@throws DataFormatException
 	 */
 	private Carte lireCarte() throws DataFormatException {
 		ignorerCommentaires();
@@ -88,7 +95,7 @@ public class LecteurDonnees {
 			for (int lig = 0; lig < nbLignes; lig++) {
 				for (int col = 0; col < nbColonnes; col++) {
 					c = map.getCase(lig, col);
-					c.setNature(lireCase(lig, col));
+					c.setNature(lireCase());
 				}
 			}
 
@@ -100,9 +107,14 @@ public class LecteurDonnees {
 	}
 
 	/**
-	 * Lit et affiche les donnees d'une case.
+	 * Lit et renvoie les donnees d'une case.
+	 *
+	 * @return NatureTerrain
+	 * 		nature du terrain de la case
+	 *
+	 * 	@throws DataFormatException
 	 */
-	private NatureTerrain lireCase(int lig, int col) throws DataFormatException {
+	private NatureTerrain lireCase() throws DataFormatException {
 		ignorerCommentaires();
 		// System.out.print("Case (" + lig + "," + col + "): ");
 		String chaineNature = new String();
@@ -127,7 +139,14 @@ public class LecteurDonnees {
 	}
 
 	/**
-	 * Lit et affiche les donnees des incendies.
+	 * Lit et renvoie les donnees des incendies.
+	 *
+	 * @param map
+	 * 		données de la
+	 * @return List
+	 * 		Liste des incendies sur la carte
+	 *
+	 * 	@throws DataFormatException
 	 */
 	private List<Incendie> lireIncendies(Carte map) throws DataFormatException {
 		ignorerCommentaires();
@@ -149,9 +168,16 @@ public class LecteurDonnees {
 	}
 
 	/**
-	 * Lit et affiche les donnees du i-eme incendie.
-	 * 
+	 * Lit et renvoie les donnees du i-eme incendie.
+	 *
+	 * @param map
+	 * 		données de la carte
 	 * @param i
+	 * 		numéro de l'incendie
+	 * 	@return Incendie
+	 * 		incendie lu
+	 *
+	 * 	@throws DataFormatException
 	 */
 	private Incendie lireIncendie(Carte map, int i) throws DataFormatException {
 		ignorerCommentaires();
@@ -183,7 +209,14 @@ public class LecteurDonnees {
 	}
 
 	/**
-	 * Lit et affiche les donnees des robots.
+	 * Lit et renvoie les donnees des robots.
+	 *
+	 * @param map
+	 * 		données de la carte
+	 * 	@return List
+	 * 		liste des robots de la
+	 *
+	 * 	@throws DataFormatException
 	 */
 	private List<Robot> lireRobots(Carte map) throws DataFormatException {
 		ignorerCommentaires();
@@ -194,7 +227,7 @@ public class LecteurDonnees {
 			// System.out.println("Nb de robots = " + nbRobots);
 
 			for (int i = 0; i < nbRobots; i++) {
-				robots.add(lireRobot(i, map));
+				robots.add(lireRobot(map));
 			}
 
 		} catch (NoSuchElementException e) {
@@ -204,10 +237,16 @@ public class LecteurDonnees {
 	}
 
 	/**
-     * Lit et affiche les donnees du i-eme robot.
-     * @param i
+     * Lit et renvoie les donnees du i-eme robot.
+     * @param map
+	 * 		données de la carte
+	 *
+	 * @return Robot
+	 * 		robot
+	 *
+	 * 	@throws DataFormatException
      */
-    private Robot lireRobot(int i, Carte map) throws DataFormatException {
+    private Robot lireRobot(Carte map) throws DataFormatException {
 
         Case pos;
 		Robot robot;
@@ -276,7 +315,7 @@ public class LecteurDonnees {
 	/**
 	 * Verifie qu'il n'y a plus rien a lire sur cette ligne (int ou float).
 	 * 
-	 * @throws ExceptionFormatDonnees
+	 * @throws DataFormatException
 	 */
 	private void verifieLigneTerminee() throws DataFormatException {
 		if (scanner.findInLine("(\\d+)") != null) {

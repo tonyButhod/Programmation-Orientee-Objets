@@ -6,8 +6,26 @@ import animation.*;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+/**
+ * Classe contenant que des fonctions statiques utilisant l'algorithme de Dijkstra.
+ * Le principal objectif de cette classe est de clarifier le code en regroupant toutes
+ * les fonctions liées à Dijkstra dans ce fichier, permettant de réduire la taille
+ * du fichier roboot.
+ */
 public class Dijkstra {
 
+    /**
+     * Calcule et renvoie le temps minimum pour que le robot se déplace sur la
+     * case end.
+     * Cette fonction renvoie -1 si le robot ne peut pas atteindre la case end.
+     *
+     * @param robot
+     * 		robot que l'on souhaite calculer le temps de déplacement minimum.
+     * @param end
+     * 		case de destination.
+     * @return long
+     *      temps nécessaire pour le déplacement du robot (-1 si pas possible)
+     */
     public static long tempsMin(Robot robot, Case end) {
         Carte map = robot.getCarte();
         Case start = robot.getPosition();
@@ -64,6 +82,23 @@ public class Dijkstra {
         }
     }
 
+    /**
+     * Calcule et renvoie le temps minimum pour que le robot atteigne la case end.
+     * De plus, elle ajoute tous les évènements nécessaires au déplacement dans le simulateur
+     * simu à compter du temps initial tpsDebut.
+     * Renvoie -1 et ne prévoit aucun déplacement si la case n'est pas atteignable.
+     *
+     * @param simu
+     * 		simulateur dans lequel on souhaite ajouter les évènements.
+     * @param robot
+     * 		robot que l'on souhaite déplacer.
+     * @param end
+     * 		case de destination.
+     * @param tpsDebut
+     * 		date initiale à partir de laquelle on commence le déplacement.
+     * @return long
+     *      temps nécessaire pour le déplacement du robot (-1 si pas possible)
+     */
     public static long deplaceRobot(Simulateur simu, Robot robot, Case end, long tpsDebut) {
         Carte map = robot.getCarte();
         Case start = robot.getPosition();
@@ -143,8 +178,20 @@ public class Dijkstra {
         }
     }
 
-    //Fonction calculant l'itinéraire le plus court pour aller remplir reservoir du robot
-    // Renvoie true si le robot peut aller faire le plein, false sinon
+    /**
+     * Calcule le point d'eau le plus proche et prévoit la série de déplacements
+     * nécessaires pour l'atteindre, ainsi que le remplissage du robot.
+     * Renvoie true si le robot peut se remplir, false sinon.
+     *
+     * @param simu
+     * 		simulateur dans lequel on souhaite ajouter les évènements.
+     * @param robot
+     * 		robot que l'on souhaite déplacer.
+     * @param tpsDebut
+     * 		date initiale à partir de laquelle on commence le déplacement.
+     * @return boolean
+     *      si le robot peut se remplir ou non.
+     */
     public static boolean fairePlein(Simulateur simu, Robot robot, long tpsDebut) {
         Carte map = robot.getCarte();
         Case start = robot.getPosition();
@@ -228,8 +275,16 @@ public class Dijkstra {
         }
     }
 
-    //On pourra optimiser et insérer directement les 4 cases
-    //Insere une case dans une liste triée, en fonction des valeurs indiquées dans temps
+    /**
+     * Insere la case c dans la liste triée LC en fonction du temps indiqué dans le tableau temps.
+     *
+     * @param temps
+     * 		tableau des temps pour chaque case.
+     * @param LC
+     * 		liste des cases atteignables dans l'algorithme de Dijkstra.
+     * @param c
+     * 		case que l'on souhaite insérer.
+     */
     private static void insereTrieCase(double temps[][], LinkedList<Case> LC, Case c) {
         ListIterator<Case> ite = LC.listIterator();
         while (ite.hasNext()) {
@@ -242,7 +297,17 @@ public class Dijkstra {
         ite.add(c);
     }
 
-    //Fait pareil que insereTrieCase(), mais supprime l'occurrence déjà existante en plus
+    /**
+     * Met à jour la position de la case c dans la liste triée LC en fonction
+     * du temps dans le tableau temps (le temps lié c a été modifié).
+     *
+     * @param temps
+     * 		tableau des temps pour chaque case.
+     * @param LC
+     * 		liste des cases atteignables dans l'algorithme de Dijkstra.
+     * @param c
+     * 		case que l'on souhaite repositionner dans la liste.
+     */
     private static void updateCase(double temps[][], LinkedList<Case> LC, Case c) {
         ListIterator<Case> ite = LC.listIterator();
         while (ite.hasNext()) {

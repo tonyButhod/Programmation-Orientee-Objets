@@ -6,18 +6,46 @@ import strategie.Dijkstra;
 
 import exception.*;
 
+/** Classe fournissant l'implémentation des Interventions
+ *  A la date correspondante, fait intervenir le robot en versant l'eau qu'il contient,
+ *  et si nécessaire lui ordonne d'aller se remplir.
+ *
+ *  Remarque : cette classe extend la classe Evenement.
+ */
 public class Intervention extends Evenement {
 	private Incendie incendie;
 	private Simulateur simu;
 
+	/**
+	 * Enregistre les paramètres passés en argument liés à une intervention.
+	 *
+	 * @param date
+	 * 		date d'exécution de l'évènement intervention.
+	 * @param robot
+	 * 		robot associé à l'intervention.
+	 * @param incendie
+	 * 		incendie sur lequel intervenir.
+	 * @param simu
+	 * 		simulateur qui exécute l'intervention.
+	 */
 	public Intervention(long date, Robot robot, Incendie incendie, Simulateur simu) {
 		super(date, robot);
 		this.incendie = incendie;
 		this.simu = simu;
 	}
-	
-	
-	
+
+
+	/**
+	 * Redéfinition de la fonction execute.
+	 * Vérifie si le robot est bien sur l'incendie désiré (renvoie une exception sinon).
+	 * Si c'est la cas, elle verse l'eau du robot sur l'incendie.
+	 * Si le robot est vide, elle lui ordonne de retourner se remplir.
+	 * Sinon, si le feu n'est toujours pas éteint, l'intervention continue
+	 * (avec la création d'une nouvelle intervention).
+	 * Sinon, le feu est éteint, le robot indique alors au chef robot qu'il a fini.
+	 *
+	 * @throws ExecutionEvenementException
+	 */
 	@Override
 	public void execute() throws ExecutionEvenementException{
 		if (!this.estSurIncendie()) {
