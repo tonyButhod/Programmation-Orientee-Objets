@@ -45,10 +45,12 @@ public class Deplacement extends Evenement {
 		Carte map = this.getRobot().getCarte();
 		Robot r = this.getRobot();
 		Case pos = r.getPosition();
-		if (map.voisinExiste(pos, direction) && r.getVitesse(pos.getNature())>0) {
-			r.setPosition(map.getVoisin(pos, direction));
-		}
-		else {
+		if (map.voisinExiste(pos, direction)) {
+			Case newpos = map.getVoisin(pos, direction);
+			if (r.getVitesse(newpos.getNature()) > 0) { //On teste la possibilité d'aller sur la nouvelle case qui existe
+				r.setPosition(map.getVoisin(pos, direction));
+			}
+		} else {
 			throw new ExecutionEvenementException("Deplacement", "Deplacement impossible sur la case");
 		}
 	}
