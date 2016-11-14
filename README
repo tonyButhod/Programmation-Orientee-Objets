@@ -1,19 +1,25 @@
 Ensimag 2A POO - TP 2016/17
 ============================
 
-- src: contient les classes fournies par les enseignants
-  -> LecteurDonnees.java         : lit tous les elements d'un fichier de description de donnees (cases, incendies et robots) et les affiche.
-                                   A vous de MODIFIER cette classe (ou en ecrire une nouvelle) pour creer les objets correspondants à vos propres classes
-  -> TestLecteurDonnees.java     : lit un fichier de donnees et affiche son contenu
-  -> TestInvader                 : cree un simulateur "mini Invaders" dans une fenetre graphique
+- src: contient les classes implémentées pour le projet, réparties dans différents sous-dossiers :
+       - animation: contient les classes d'évènements et le simulateur
+       - exception: contient les classes d'exceptions 
+       - io: contient le LecteurDonnees
+       - objects: contient les classes des différents objets manipulés dans la simulation (incendie, carte, case, robots...)
+       - stratégie: contient les classes de calcul de la stratégie et de plus court chemin
+       Les différents tests sont présents dans le dossier src
 
-- cartes: quelques exemples de fichiers de donnees
+- cartes: quelque exemples de fichiers de donnees
 
 - bin/gui.jar: archive Java contenant les classes de l'interface graphique. Voir un exemple d'utilisation dans TestInvader.java
 
 - doc: la documentation (API) des classes de l'interface graphique contenues dans gui.jar. Point d'entrée: index.html
 
+- doc_cplt: la documentation (API) des classes definies pour le projet. Point d'entrée: index.html
+
 - Makefile: quelques explications sur la compilation en ligne, notamment la notion de classpath et l'utilisation de gui.jar
+
+- images: contient les images utilisés dans la simulation (feu, robots, terrains...)
 
 ============================
 
@@ -24,3 +30,5 @@ Pour exécuter une simulation il faut lancer la commande :
      make exeTestChefRobot MAP=chemin/nom_fichier_carte.map
 
 Si aucune carte n'est spécifiée, la carte du sujet est chargée par défaut.
+
+---> Quelquefois l'affichage présente un problème dans la fenêtre, il suffit alors de redimmensionner celle-ci ou de lancer la simulation pour que l'affichage soit normal.
