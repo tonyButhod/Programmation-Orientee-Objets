@@ -64,7 +64,7 @@ TestIncendie: objects src/TestIncendie.java
 	javac -d bin -sourcepath src src/TestIncendie.java
 
 TestDonnees: objects src/TestDonnees.java
-	javac -d bin -sourcepath src src/TestDonnees.java
+	javac -d bin -classpath bin/gui.jar -sourcepath src  src/TestDonnees.java
 
 TestRobot: objects src/TestRobot.java
 	javac -d bin -classpath bin/gui.jar -sourcepath src src/TestRobot.java
@@ -98,10 +98,10 @@ javadoc:
 exeInvader: TestInvader TestLecture
 	java -classpath bin:bin/gui.jar TestInvader
 
-exeLecture: 
+exeLecture: TestLecture
 	java -classpath bin TestLecteurDonnees cartes/carteSujet.map
 
-exeTestCase: 
+exeTestCase: TestCase
 	java -classpath bin TestCase
 
 exeTestCarte: TestCarte
@@ -128,7 +128,7 @@ exeTestDijkstra: TestDijkstra
 exeTestIncendie: TestIncendie
 	java -classpath bin:bin/gui.jar TestIncendie
 
-exeTestDonnees: TestDonnes
+exeTestDonnees: TestDonnees
 	java -classpath bin:bin/gui.jar TestDonnees
 
 exeTestRobot: TestRobot

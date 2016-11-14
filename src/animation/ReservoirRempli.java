@@ -39,6 +39,8 @@ public class ReservoirRempli extends Evenement {
 		}
 		//System.out.println(robot);
 		//Le robot avertit le chef qu'il a fini son travail
-		robot.getChefRobot().leaveAMessage(robot);
+		if (robot.getChefRobot() != null){
+			robot.getChefRobot().leaveAMessage(robot);
+		}
 	}
 }
