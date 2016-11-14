@@ -88,7 +88,7 @@ strategie: $(STRAT)
 	javac -d bin -classpath bin/gui.jar -sourcepath src $^
 
 javadoc:
-	javadoc -private -d doc_cplt -sourcepath src $(STRAT) $(ANIM) $(EXCEPT) $(OBJ) $(IO) -classpath bin/gui.jar
+	javadoc -encoding utf8 -docencoding utf8 -charset utf8 -private -d doc_cplt -sourcepath src $(STRAT) $(ANIM) $(EXCEPT) $(OBJ) $(IO) -classpath bin/gui.jar
 
 # Execution:
 # on peut taper directement la ligne de commande :
@@ -135,6 +135,6 @@ exeTestRobot: TestRobot
 	java -classpath bin:bin/gui.jar TestRobot
 
 exeTestChefRobot: TestChefRobot
-	java -classpath bin:bin/gui.jar TestChefRobot
+	java -classpath bin:bin/gui.jar TestChefRobot $(MAP)
 clean:
 	rm -rf bin/src/ bin/exception/ bin/*.class bin/io/*.class bin/objects/*.class bin/animation/*.class bin/strategie/*.class src/*~ src/objects/*~ src/animation/*~ src/strategie/*~

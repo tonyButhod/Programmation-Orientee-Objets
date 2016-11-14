@@ -14,3 +14,13 @@ Ensimag 2A POO - TP 2016/17
 - doc: la documentation (API) des classes de l'interface graphique contenues dans gui.jar. Point d'entrée: index.html
 
 - Makefile: quelques explications sur la compilation en ligne, notamment la notion de classpath et l'utilisation de gui.jar
+
+============================
+
+Execution d'une simulation :
+
+Pour exécuter une simulation il faut lancer la commande :
+
+     make exeTestChefRobot MAP=chemin/nom_fichier_carte.map
+
+Si aucune carte n'est spécifiée, la carte du sujet est chargée par défaut.
