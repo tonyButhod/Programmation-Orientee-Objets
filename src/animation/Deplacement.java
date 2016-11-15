@@ -49,9 +49,11 @@ public class Deplacement extends Evenement {
 			Case newpos = map.getVoisin(pos, direction);
 			if (r.getVitesse(newpos.getNature()) > 0) { //On teste la possibilité d'aller sur la nouvelle case qui existe
 				r.setPosition(map.getVoisin(pos, direction));
+			} else {
+				throw new ExecutionEvenementException("Deplacement", "Deplacement impossible sur la case");
 			}
 		} else {
-			throw new ExecutionEvenementException("Deplacement", "Deplacement impossible sur la case");
+			throw new ExecutionEvenementException("Deplacement", "Deplacement impossible sur la case (en dehors de la carte)");
 		}
 	}
 }
